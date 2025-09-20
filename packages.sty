@@ -1,0 +1,96 @@
+%S\usepackage[utf8]{inputenc}
+
+%STYLE AND FORMATTING total={6in, 8in}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{changepage}
+\usepackage{adjustbox}
+\usepackage{booktabs} 				  	 % For tables (toprule)
+\usepackage{caption}                  	 % For customizing captions
+\usepackage{fancyhdr}                 	 % For headers and footers
+\usepackage{float} 						 % For floating tables and figures
+
+\pagestyle{fancy}                     	 % Use fancy header and footer
+\fancyhf{}                            	 % Clear default header and footer
+\fancyhead[L]{Mathias Porsgaard}       	 % Left header
+\fancyhead[C]{Assignment 3}               	 % Center header
+\fancyhead[R]{University of Copenhagen}  % Right header
+\fancyfoot[C]{\thepage}                  % Center footer
+
+%LANGUAGE
+%\usepackage[english]{babel}
+
+%MATH
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%TABLES
+\usepackage{multirow} % Multilevel rows
+\usepackage{multicol} % Multilevel columns
+
+%FIGURES
+\usepackage{graphicx}
+%\usepackage{subfig}
+\usepackage{pdfpages} % for inserting pdf pages, getting over full hbox etc. 
+%\usepackage{pgfplots} %rarely need this, for data-based plots so cool. 
+\usepackage{svg} % For inserting svg files.
+\usepackage{caption}
+\usepackage{subcaption}
+
+%MISC
+\usepackage[hidelinks]{hyperref} % Hyperreferencing 
+\usepackage{url} % Insert urls 
+\usepackage{verbatim} % For printing code, no latex commands are executed.
+
+%Python 
+\usepackage{pythontex}
+
+%APPENDIX
+
+%BIBLIOGRAPHY
+\usepackage[backend=biber,
+            style=authoryear-comp,
+            sorting=ynt
+            ]{biblatex} %alternative options are 'notes' or 'authordate'
+\addbibresource{references.bib}
+\usepackage{csquotes}
+
+%Inserting code 
+\usepackage[final]{listings}
+\usepackage{xcolor}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mypython}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegray},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
