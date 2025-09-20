@@ -8,3 +8,9 @@
 *.bbl
 *.blg
 *.pytxcode
+
+# Ignore code part
+*.ipynb
+*.pytxcode
+*.csv
+__pycache__
