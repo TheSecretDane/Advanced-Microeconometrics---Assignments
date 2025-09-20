@@ -11,6 +11,7 @@
 
 # Ignore code part
 *.ipynb
+*.py
 *.pytxcode
 *.csv
 __pycache__
