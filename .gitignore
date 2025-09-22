@@ -10,8 +10,8 @@
 *.pytxcode
 
 # Ignore code part
-*.ipynb
-*.py
+#*.ipynb
+#*.py
 *.pytxcode
 *.csv
 __pycache__
