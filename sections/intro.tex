@@ -12,6 +12,8 @@ It follows that for CD to have CRS, it must be homogeneous of degree one, i.e. $
 which forms the linear hypothesis we want to test i.e. $H_0: \beta_K + \beta_L = 1$ vs. $H_A: \beta_K + \beta_L \neq 1$.
 While $K$ and $L$ are certainly important production inputs, we cannot hope to observe \textbf{all} input factors that make up production. To investigate the functional form of the production function, we estimate a simple (two-way) fixed effects (FE) model, to remove the time-invarying and time-varying unobserved heterogeneity. Note, that these factors with control for much more than just TFP, but also other unobserved factors that may affect production. 
 
+\hrule
+
 We start by taking logs of the production function to linearize it and add an idiosyncratic error term, $\varepsilon_{it}$, to get,
 \begin{align*}
     \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} + \varepsilon_{it} \\
@@ -26,4 +28,18 @@ where $y_{it} = \ln Y_{it}$, $k_{it} = \ln K_{it}$ and $l_{it} = \ln L_{it}$.
 
 \textbf{Gameplan:}
 
-Write stuff about assumptions, and then transformations, prob go from inconsistent pooled OLS to consistent FE. Right the estimator, list assumptions for identification and consistency (strict/cont exog, non-generacy) -> show consistency by LLN convergence in plim. Next, talk about asymptotic normality, CLT, variance estimation (efficiency - robust, cluster). Finally, hypothesis testing (Wald). Then proceed to empirical application (include wald-test code, since it is not given or done in any exercises).  
+Write stuff about assumptions, and then transformations, prob go from inconsistent pooled OLS to consistent FE. Right the estimator, list assumptions for identification and consistency (strict/cont exog, non-generacy) -> show consistency by LLN convergence in plim. Next, talk about asymptotic normality, CLT, variance estimation (efficiency - robust, cluster). Finally, hypothesis testing (Wald). Then proceed to empirical application (include wald-test code, since it is not given or done in any exercises).
+
+\begin{itemize}
+    \item Mikkel: Requirements for FE and why pooled OLS is inconsistent (identification, assumptions, consistency, exogeneity). 
+    \item Mikkel: Show consistency (LLN $\to$ plim convergence). 
+    \item Mikkel: Show Asymptotic normality.
+    \item Mathias: Show Efficiency (Robust or not).
+    \item Noah: Seriel Corr, Rank test, Homoskedasticity (maybe). 
+    \item Noah: Wald-Test (one sided as well)? Check form of test when using robust std. err. 
+    \item Mathias: Potentially the above, for time variant fixed effects.
+    \item Noah: Present empirical results. 
+    \item Noah: Estimation table. 
+    \item Noah: Misspecification test table.
+    \item Noah: Test table for linear hypothesis (Wald). 
+\end{itemize}
