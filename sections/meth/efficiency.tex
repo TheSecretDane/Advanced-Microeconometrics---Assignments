@@ -1,0 +1,17 @@
+\subsection{Efficiency}
+
+It follows, that for the FE estimator to be efficient - i.e. have the smallest possible (asymptotic) variance -, we need to make some assumptions regarding the variance of the idiosyncratic error term, $\varepsilon_{it}$. Specifically, we need that the variance is homoscedastic and not serially correlated, i.e. $\text{Var}(\varepsilon_{it}) = \sigma^2$ and $\text{Cov}(\varepsilon_{it}, \varepsilon_{is}) = 0$ for $t \neq s$, or in the stacked notation, that, $\Omega_{\bm{\varepsilon}} = \sigma^2 I_T$. This results in the asymptotic variance (ref Mikkels eq for asymptotic normality), 
+\begin{align*}
+    \mathbb{E}\left[ \bm{\ddot{X}}_i^\prime \bm{u}_i \bm{u}_i^\prime \bm{\ddot{X}}_i \right] &= \mathbb{E}\left[ \bm{\ddot{X}}_i^\prime \mathbb{E}[\bm{u}_i \bm{u}_i^\prime | \bm{x}_i \alpha_i]\bm{\ddot{X}}_i \right] \\
+    &= \mathbb{E}[\ddot{X}_i^\prime \sigma_u^2 \bm{I}_T \bm{\ddot{X}}_i]
+\end{align*}
+such that, 
+\begin{align*}
+    \text{Avar}(\hat{\beta}_{FE}) = \sigma_u^2 \mathbb{E}[\bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i]^{-1} / N
+\end{align*}
+
+If these assumptions do not hold, we can still obtain consistent estimates of the standard errors using robust or clustered standard errors, though often at the cost of efficiency. In which case we estimate the middle part of the sandwich from (Mikkel ref normality) using the analogy principle i.e. using the estimated residuals, such that, 
+\begin{align*}
+    \hat{\text{Avar}}(\hat{\beta}_{FE}) = \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1} \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \hat{\bm{u}}_i \hat{\bm{u}}_i^\prime \bm{\ddot{X}}_i \right) \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1}
+\end{align*} 
+Which is consistent under just the strict exogeneity assumption as well as the rank assumption - because consistent estimation of the error, as well as the outer matrices being invertible? (remove outer sums possibly). 

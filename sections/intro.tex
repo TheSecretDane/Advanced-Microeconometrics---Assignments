@@ -14,17 +14,35 @@ While $K$ and $L$ are certainly important production inputs, we cannot hope to o
 
 \hrule
 
-We start by taking logs of the production function to linearize it and add an idiosyncratic error term, $\varepsilon_{it}$, to get,
+We start by taking logs of the production function to linearize it,
 \begin{align*}
-    \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} + \varepsilon_{it} \\
+    \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} \\
     y_{it} &= \beta_K k_{it} + \beta_L l_{it} + u_{it}, \quad u_{it} = \ln A_{it}
 \end{align*}
-Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific effect, $\alpha_i$, a time-varying effect, $\gamma_t$, and add an idiosyncratic error, $\varepsilon_{it}$, i.e. $u_{it} = \alpha_i + \gamma_t + \varepsilon_{it}$. The FE model is then given by,
+Suppose that $\ln A_{it}$ can be decomposed into time-invariant firm-specific effects, $\alpha_i$, a time-varying effects, $\gamma_t$, and add an idiosyncratic error, $\varepsilon_{it}$, i.e. $u_{it} = \alpha_i + \gamma_t + \varepsilon_{it}$. The FE model is then given by,
 \begin{align*}
     u_{it} &= \alpha_i + \gamma_t + \varepsilon_{it}, \\
     y_{it} &= \alpha_i + \gamma_t + \beta_K k_{it} + \beta_L l_{it} + \varepsilon_{it},
 \end{align*} 
-where $y_{it} = \ln Y_{it}$, $k_{it} = \ln K_{it}$ and $l_{it} = \ln L_{it}$. 
+where $y_{it} = \ln Y_{it}$, $k_{it} = \ln K_{it}$ and $l_{it} = \ln L_{it}$. Collect the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)$. The FE model can then be written on compact form as,
+\begin{align*}
+    y_{it} = \alpha_i + \gamma_t + \bm{x}_{it} \bm{\beta} + \varepsilon_{it}.
+\end{align*}
+
+Due to $\alpha_i$ and $\gamma_t$ being unobserved, we cannot estimate them directly, and if we suspect that they are correlated with $\bm{x}_{it}$, we need to control for them to obtain consistent estimates of the parameters. This can be done by transforming the data to remove these effects, and then estimate the parameters using OLS on the transformed data.
+
+The transformation used to remove $\alpha_i$ is the within transformation, which subtracts the individual specific mean from each observation, i.e. $\tilde{y}_{it} = y_{it} - \bar{y}_i$, where $\bar{y}_i = \frac{1}{T} \sum_{t=1}^T y_{it}$ is the individual specific mean. Similarly to remove the time variant fixed effect, we can use the time within transformation, which subtracts the time specific mean from each observation, i.e. $\dot{y}_{it} = y_{it} - \bar{y}_t$, where $\bar{y}_t = \frac{1}{N} \sum_{i=1}^N y_{it}$ is the time specific mean. However, since we have both individual and time fixed effects, we need to use a two-way transformation to remove both effects. This can be done by applying the within transformation twice, first over the individual dimension and then over the time dimension (or vice versa). 
+
+Denote the transformation matrices, 
+\begin{align*}
+    Q_T = I_T - \frac{1}{T} \iota_T \iota_T', \quad Q_N = I_N - \frac{1}{N} \iota_N \iota_N',
+\end{align*}
+
+The same transformation is applied to $\bm{x}_{it}$ and $\varepsilon_{it}$, i.e. $\tilde{\bm{x}}_{it} = \bm{x}_{it} - \bar{\bm{x}}_i$ and $\tilde{\varepsilon}_{it} = \varepsilon_{it} - \bar{\varepsilon}_i$. The time fixed effects, $\gamma_t$, can be removed by including time dummies in the regression (or by a similar transformation over the cross-sectional dimension). The transformed model is then given by, 
+\begin{align*}
+    \tilde{y}_{it} = \tilde{\bm{x}}_{it} \bm{\beta} + \tilde{\varepsilon}_{it}.
+\end{align*}
+
 
 \textbf{Gameplan:}
 
