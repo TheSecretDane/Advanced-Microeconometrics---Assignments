@@ -274,3 +274,26 @@ def load_example_data():
         'Black', 
     ]
     return y, x, T, year, label_y, label_x
+
+# On differenced data no matter what! 
+def serial_corr(y, x, T):
+    # Calculate the residuals
+    b_hat = est_ols(y, x)
+    e = y - x@b_hat
+    
+    # Create a lag transformation matrix
+    L_T = np.eye(T, k=-1)
+    L_T = L_T[1:]
+
+    # Lag residuals
+    e_l = perm(L_T, e)
+
+    # Create a transformation matrix that removes the first observation of each individual
+    I_T = np.eye(T, k=0)
+    I_T = I_T[1:]
+    
+    # Remove first observation of each individual
+    e = perm(I_T, e)
+    
+    # Calculate the serial correlation
+    return estimate(e, e_l,T=T-1)
