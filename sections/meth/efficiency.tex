@@ -6,11 +6,11 @@ It follows, that for the FE estimator to be efficient - i.e. have the smallest p
     &= \mathbb{E}[\ddot{X}_i^\prime \sigma_u^2 \bm{I}_T \bm{\ddot{X}}_i]
 \end{align*}
 such that the asymptotic variance is,
-\begin{align*}
+\begin{align*} \label{eq:homo_variance}
     \text{Avar}(\hat{\beta}_{FE}) = \sigma_u^2 \mathbb{E}[\bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i]^{-1} / N
 \end{align*}
 If these assumptions do not hold, we can still obtain consistent estimates of the standard errors using robust or clustered standard errors, though often at the cost of efficiency. In which case we estimate the middle part of the sandwich from (Mikkel ref normality) using the analogy principle i.e. using the estimated residuals, such that, 
-\begin{align*}
+\begin{align*} \label{eq:robust_variance}
     \hat{\text{Avar}}(\hat{\beta}_{FE}) = \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1} \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \hat{\bm{u}}_i \hat{\bm{u}}_i^\prime \bm{\ddot{X}}_i \right) \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1}
 \end{align*} 
 Which is consistent under just the strict exogeneity assumption as well as the rank assumption - because consistent estimation of the error, as well as the outer matrices being invertible? (remove outer sums possibly and go full stacked like a maniac). 
