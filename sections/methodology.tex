@@ -1,6 +1,21 @@
-\section{Methodology}
+\section{Methodology} \label{sec:methodology}
 
-\subsection{(Econometric theory and methodology)}
+We start by taking logs of \eqref{eq:CD} to linearize it,
+\begin{align*}
+    \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} \\
+    y_{it} &= \beta_K k_{it} + \beta_L l_{it} + \varepsilon_{it}, \quad \varepsilon_{it} = \ln A_{it}
+\end{align*}
+Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific effects, $\alpha_i$ and add an idiosyncratic error, $u_{it}$, i.e. $\varepsilon_{it} = \alpha_i + u_{it}$. The model is then given by,
+\begin{align*}
+    u_{it} &= \alpha_i + u_{it}, \\
+    y_{it} &= \alpha_i + \beta_K k_{it} + \beta_L l_{it} + u_{it}
+\end{align*}
+Then stack the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)$. The model can then be written on compact form as,
+\begin{align*}
+    y_{it} = \alpha_i + \bm{x}_{it} \bm{\beta} + u_{it}.
+\end{align*}
+
+\textbf{Mikkel:}
 
 Define $\pmb{x}_{it}=[k_{it}, l_{it}]$ as the regressors of our model and $y_{it}$ as the dependent variable, which are both observable. Further define the composite error term $v_{it}=c_i+u_{it}$, which contains both a time-invariant term $c_i$ and a time-varying term $u_{it}$. Further define 
 

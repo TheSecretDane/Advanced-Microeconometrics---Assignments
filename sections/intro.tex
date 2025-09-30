@@ -1,47 +1,45 @@
-\section{Cobb-Douglas production with CRS}
+\section{Cobb-Douglas production} \label{sec:intro}
 
 In this assignment we want to test whether the Cobb-Douglas production function (CD) exhibits constant returns to scale (CRS) at a firm level using real data and panel data methods. The Cobb-Douglas production function is given by,
-\begin{align*}
+\begin{align*} \label{eq:CD}
     F(K,L) = A K^{\beta_K} L^{\beta_L}
 \end{align*}
 where $K$ is capital, $L$ is labor, $A$ is total factor productivity (TFP) and $\beta_K, \beta_L$ are the output elasticities of capital and labor, respectively.
 It follows that for CD to have CRS, it must be homogeneous of degree one, i.e. $\beta_K + \beta_L = 1$, as seen from,
-\begin{align*}
+\begin{align*} 
     F(\lambda K, \lambda L) &= A (\lambda K)^{\beta_K} (\lambda L)^{\beta_L} = A \lambda^{\beta_K + \beta_L} K^{\beta_K} L^{\beta_L} = \lambda F(K,L) \iff \beta_K + \beta_L = 1.
 \end{align*} 
 which forms the linear hypothesis we want to test i.e. $H_0: \beta_K + \beta_L = 1$ vs. $H_A: \beta_K + \beta_L \neq 1$.
 While $K$ and $L$ are certainly important production inputs, we cannot hope to observe \textbf{all} input factors that make up production. To investigate the functional form of the production function, we estimate a simple (two-way) fixed effects (FE) model, to remove the time-invarying and time-varying unobserved heterogeneity. Note, that these factors with control for much more than just TFP, in fact all other unobserved factors that affect production. 
 
-\hrule
+% We start by taking logs of the production function to linearize it,
+% \begin{align*}
+%     \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} \\
+%     y_{it} &= \beta_K k_{it} + \beta_L l_{it} + u_{it}, \quad u_{it} = \ln A_{it}
+% \end{align*}
+% Suppose that $\ln A_{it}$ can be decomposed into time-invariant firm-specific effects, $\alpha_i$, a time-varying effects, $\gamma_t$, and add an idiosyncratic error, $\varepsilon_{it}$, i.e. $u_{it} = \alpha_i + \gamma_t + \varepsilon_{it}$. The FE model is then given by,
+% \begin{align*}
+%     u_{it} &= \alpha_i + \gamma_t + \varepsilon_{it}, \\
+%     y_{it} &= \alpha_i + \gamma_t + \beta_K k_{it} + \beta_L l_{it} + \varepsilon_{it},
+% \end{align*} 
+% where $y_{it} = \ln Y_{it}$, $k_{it} = \ln K_{it}$ and $l_{it} = \ln L_{it}$. Collect the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)$. The FE model can then be written on compact form as,
+% \begin{align*}
+%     y_{it} = \alpha_i + \gamma_t + \bm{x}_{it} \bm{\beta} + \varepsilon_{it}.
+% \end{align*}
 
-We start by taking logs of the production function to linearize it,
-\begin{align*}
-    \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} \\
-    y_{it} &= \beta_K k_{it} + \beta_L l_{it} + u_{it}, \quad u_{it} = \ln A_{it}
-\end{align*}
-Suppose that $\ln A_{it}$ can be decomposed into time-invariant firm-specific effects, $\alpha_i$, a time-varying effects, $\gamma_t$, and add an idiosyncratic error, $\varepsilon_{it}$, i.e. $u_{it} = \alpha_i + \gamma_t + \varepsilon_{it}$. The FE model is then given by,
-\begin{align*}
-    u_{it} &= \alpha_i + \gamma_t + \varepsilon_{it}, \\
-    y_{it} &= \alpha_i + \gamma_t + \beta_K k_{it} + \beta_L l_{it} + \varepsilon_{it},
-\end{align*} 
-where $y_{it} = \ln Y_{it}$, $k_{it} = \ln K_{it}$ and $l_{it} = \ln L_{it}$. Collect the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)$. The FE model can then be written on compact form as,
-\begin{align*}
-    y_{it} = \alpha_i + \gamma_t + \bm{x}_{it} \bm{\beta} + \varepsilon_{it}.
-\end{align*}
+% Due to $\alpha_i$ and $\gamma_t$ being unobserved, we cannot estimate them directly, and if we suspect that they are correlated with $\bm{x}_{it}$, we need to control for them to obtain consistent estimates of the parameters. This can be done by transforming the data to remove these effects, and then estimate the parameters using OLS on the transformed data.
 
-Due to $\alpha_i$ and $\gamma_t$ being unobserved, we cannot estimate them directly, and if we suspect that they are correlated with $\bm{x}_{it}$, we need to control for them to obtain consistent estimates of the parameters. This can be done by transforming the data to remove these effects, and then estimate the parameters using OLS on the transformed data.
+% The transformation used to remove $\alpha_i$ is the within transformation, which subtracts the individual specific mean from each observation, i.e. $\tilde{y}_{it} = y_{it} - \bar{y}_i$, where $\bar{y}_i = \frac{1}{T} \sum_{t=1}^T y_{it}$ is the individual specific mean. Similarly to remove the time variant fixed effect, we can use the time within transformation, which subtracts the time specific mean from each observation, i.e. $\dot{y}_{it} = y_{it} - \bar{y}_t$, where $\bar{y}_t = \frac{1}{N} \sum_{i=1}^N y_{it}$ is the time specific mean. However, since we have both individual and time fixed effects, we need to use a two-way transformation to remove both effects. This can be done by applying the within transformation twice, first over the individual dimension and then over the time dimension (or vice versa). 
 
-The transformation used to remove $\alpha_i$ is the within transformation, which subtracts the individual specific mean from each observation, i.e. $\tilde{y}_{it} = y_{it} - \bar{y}_i$, where $\bar{y}_i = \frac{1}{T} \sum_{t=1}^T y_{it}$ is the individual specific mean. Similarly to remove the time variant fixed effect, we can use the time within transformation, which subtracts the time specific mean from each observation, i.e. $\dot{y}_{it} = y_{it} - \bar{y}_t$, where $\bar{y}_t = \frac{1}{N} \sum_{i=1}^N y_{it}$ is the time specific mean. However, since we have both individual and time fixed effects, we need to use a two-way transformation to remove both effects. This can be done by applying the within transformation twice, first over the individual dimension and then over the time dimension (or vice versa). 
+% Denote the transformation matrices, 
+% \begin{align*}
+%     Q_T = I_T - \frac{1}{T} \iota_T \iota_T', \quad Q_N = I_N - \frac{1}{N} \iota_N \iota_N',
+% \end{align*}
 
-Denote the transformation matrices, 
-\begin{align*}
-    Q_T = I_T - \frac{1}{T} \iota_T \iota_T', \quad Q_N = I_N - \frac{1}{N} \iota_N \iota_N',
-\end{align*}
-
-The same transformation is applied to $\bm{x}_{it}$ and $\varepsilon_{it}$, i.e. $\tilde{\bm{x}}_{it} = \bm{x}_{it} - \bar{\bm{x}}_i$ and $\tilde{\varepsilon}_{it} = \varepsilon_{it} - \bar{\varepsilon}_i$. The time fixed effects, $\gamma_t$, can be removed by including time dummies in the regression (or by a similar transformation over the cross-sectional dimension). The transformed model is then given by, 
-\begin{align*}
-    \tilde{y}_{it} = \tilde{\bm{x}}_{it} \bm{\beta} + \tilde{\varepsilon}_{it}.
-\end{align*}
+% The same transformation is applied to $\bm{x}_{it}$ and $\varepsilon_{it}$, i.e. $\tilde{\bm{x}}_{it} = \bm{x}_{it} - \bar{\bm{x}}_i$ and $\tilde{\varepsilon}_{it} = \varepsilon_{it} - \bar{\varepsilon}_i$. The time fixed effects, $\gamma_t$, can be removed by including time dummies in the regression (or by a similar transformation over the cross-sectional dimension). The transformed model is then given by, 
+% \begin{align*}
+%     \tilde{y}_{it} = \tilde{\bm{x}}_{it} \bm{\beta} + \tilde{\varepsilon}_{it}.
+% \end{align*}
 
 
 \textbf{Gameplan:}
