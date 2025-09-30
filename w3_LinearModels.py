@@ -275,6 +275,11 @@ def load_example_data():
     ]
     return y, x, T, year, label_y, label_x
 
+def fd_matrix(T):
+    D_T = np.eye(T) - np.eye(T, k=-1)
+    D_T = D_T[1:]
+    return D_T 
+
 # On differenced data no matter what! 
 def serial_corr(y, x, T):
     # Calculate the residuals
