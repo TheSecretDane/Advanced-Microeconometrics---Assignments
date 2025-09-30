@@ -9,7 +9,12 @@ such that the asymptotic variance is,
 \begin{align*}
     \text{Avar}(\hat{\beta}_{FE}) = \sigma_u^2 \mathbb{E}[\bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i]^{-1} / N
 \end{align*}
-If these assumptions do not hold, we can still obtain consistent estimates of the standard errors using robust or clustered standard errors, though often at the cost of efficiency. In which case we estimate the middle part of the sandwich from (Mikkel ref normality) using the analogy principle i.e. using the estimated residuals, such that, 
+Using the analogy principle, we have, 
+\begin{align*}
+    \hat{\text{Avar}}(\hat{\beta}_{FE}) = \hat{\sigma}_u^2 \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1}, \quad &\text{where} \quad \hat{\sigma}_u^2 = \frac{1}{N(T-1) - K} \sum_{i=1}^N \hat{\bm{u}}_i^\prime \hat{\bm{u}}_i, \\
+    &\text{and} \quad \hat{\bm{u}}_i = \bm{\ddot{y}}_i - \bm{\ddot{X}}_i \hat{\beta}_{FE}
+\end{align*}
+Note that we need to correct the degrees of freedom for the implicit estimation of the fixed effects, which is why we subtract $N$ from the denominator. If these assumptions do not hold, we can still obtain consistent estimates of the standard errors using robust or clustered standard errors, though often at the cost of efficiency. In which case we estimate the middle part of the sandwich from (Mikkel ref normality) using the analogy principle i.e. using the estimated residuals, such that, 
 \begin{align*}
     \hat{\text{Avar}}(\hat{\beta}_{FE}) = \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1} \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \hat{\bm{u}}_i \hat{\bm{u}}_i^\prime \bm{\ddot{X}}_i \right) \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1}
 \end{align*} 
