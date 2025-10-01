@@ -66,7 +66,7 @@ Now, we turn to the consistency of the FE-estimator. Inserting $\pmb{\ddot{y}}_i
     \Rightarrow \pmb{\hat{\beta}}_{FE} &= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i}}\pmb{\ddot{X}}_{i} \pmb{\beta}+\pmb{\ddot{X'}}_{i}\pmb{\ddot{u}}_i \right) \\
     &= \pmb{\beta} +\left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right)
 \end{align*}
-The Law of Large Numbers (LLN) implies that $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}]$ and $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i}]$. Then we use Slutskys theorem: $p\text{-lim}\left( \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)^{-1}\right)=(\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1}$, which is allowed since the inverse matrix is defined, due to the rank assumption, and the inverse operator is a continuous function. Altogether, it implies that the FE-estimator $\pmb{\hat{\beta}}_{FE}$ is consistent, which is a first-order concern.
+With FE.1 and 2, we can then we apply a Law of Large Numbers (LLN) such that $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}]$ and $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i}]$. Then we use Slutskys theorem: $p\text{-lim}\left( \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)^{-1}\right)=(\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1}$, which is allowed since the inverse matrix is defined, due to the rank assumption, and the inverse operator is a continuous function. Altogether, it implies that the FE-estimator $\pmb{\hat{\beta}}_{FE}$ is consistent, which is a first-order concern.
 
 \subsubsection{Asymptotic normality of Fixed Effects estimator}
 When analysing our consistent FE-estimator, we need to know the asymptotic distribution of the parameter. Rearranging the equation from the former section, we get the following:
@@ -91,9 +91,21 @@ We utilise the Wald-test to test for CRS, where the null-hypothesis is $H_0: \ma
     W:=(\mathbf{R}\widehat{\boldsymbol{\beta}}-\mathbf{r})[\mathbf{R}\widehat{\text{Avar}(\widehat{\beta}_{FE})}\mathbf{R}']^{-1}(\mathbf{R} \boldsymbol{\widehat{\beta}}-\mathbf{r})
 \end{equation*}
 
-Under the $H_0$ the Wald statistic follows a $\chi^2_Q$ distribution.
+Under the $H_0$ the Wald statistic follows a $\chi^2_Q$ distribution. When testing for CRS we test $H_0:\beta_K+\beta_K=1$, where we have $Q=1$ degrees of freedom and  $\mathbf{R}$ is a $[1 \times K]$ matrix and $\textbf{r}=1 \times 1$ matrix, where $K$ is the rank $K=E[\textbf{x}'\textbf{x}]$  from assumption FE.2. Since we only test one linear hypothesis the Walt-statistic is simply the squared t-statistic (might be very overkill to state this mathematically, but in terms of our actual estimates:)
+The null-hypothesis is given by  $H_0: \mathbf{R}\boldsymbol{\hat{\beta}}=\mathbf{r}\Leftrightarrow \begin{bmatrix}1&1 \end{bmatrix} \begin{bmatrix}\hat{\beta}_K\\ \hat{\beta}_L \end{bmatrix}=1$. Insert the estimated values for $\hat{\beta}$ and the Walt-statistic yields:
+\begin{equation*}
+    W_{robust}= (\begin{bmatrix}1&1 \end{bmatrix} 
+    \begin{bmatrix} 0.154620 \\ 0.694226 \end{bmatrix}-1)[\begin{bmatrix}1&1 \end{bmatrix}
+    \begin{bmatrix}
+        0.001735 & -0.000727 \\ 
+        -0.000727 & 0.0008968
+    \end{bmatrix} \begin{bmatrix}1&1 \end{bmatrix}-1]\approx19.403
+\end{equation*}
+To show the t-statistic is identical, we utilise the same assumptions used for the Walt-statistic to be valid. The general t-statistics properties are not 
+%Suppose we have a set of independent standard normal variables, $\{lcap,lemp\}$ denoted $Y_1,Y_2$ respectively. The sum of the squared variables follows a $\chi^2_1$ distribution: \begin{align*} \xi=\sum^2_{i=1}Y^2_i \longrightarrow\xi\sim \chi^2 \end{align*}
 
-When testing for CRS we test $H_0:\beta_K+\beta_K=1$, where we have $Q=1$ degrees of freedom and  $\mathbf{R}$ is a $[1 \times K]$ matrix and $\textbf{r}=1 \times 1$ matrix, where $K$ is the rank $K=E[\textbf{x}'\textbf{x}]$  from assumption FE.2. (\textit{dette burde stå først}:) If we use normal standard errors, we require stronger assumptions where under assumption FE.3 the FE estimator is asymptotically efficient $\rightarrow$ we can use normal standard errors. If we relax assumption FE.3, or simply reject the null-hypothesis from a serial-correlation test, like a placebo test with an AR(1) model, (\textit{see section for serial correlation for this specific test}) we have to use robust standard errors. The only change in the Wald-statistic is the variance-covariance matrix $\text{Avar}(\hat{\beta}_{FE})$, where the robust variance-covariance matrix is given by the sandwich formula. \newline
+
+(\textit{dette burde stå først}:) If we use normal standard errors, we require stronger assumptions where under assumption FE.3 the FE estimator is asymptotically efficient $\rightarrow$ we can use normal standard errors. If we relax assumption FE.3, or simply reject the null-hypothesis from a serial-correlation test, like a placebo test with an AR(1) model, (\textit{see section for serial correlation for this specific test}) we have to use robust standard errors. The only change in the Wald-statistic is the variance-covariance matrix $\text{Avar}(\hat{\beta}_{FE})$, where the robust variance-covariance matrix is given by the sandwich formula. \newline
 \textit{As seen under the efficiency section. We need to differentiate between the normal and robust version of Avar($\beta$)}.
 
 %(\textit{Currently we have used normal standard errors, but maybe we should consider clustered standard errors to account for within-firm serial correlation. I'll rewrite this, if we have implemented clustered into our results, but the implementation is not done in our exercises. Only normal and robust errors are implemented.}
