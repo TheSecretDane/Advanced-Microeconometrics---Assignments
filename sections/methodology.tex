@@ -11,38 +11,24 @@ Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific 
     y_{it} &= \alpha_i + \beta_K k_{it} + \beta_L l_{it} + u_{it}
 \end{align*}
 Then stack the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)$. The model can then be written on compact form as,
-\begin{align*}
+\begin{align}
     y_{it} = \alpha_i + \bm{x}_{it} \bm{\beta} + u_{it}.
-\end{align*}
-
-\textbf{Mikkel:}
-
-Define $\pmb{x}_{it}=[k_{it}, l_{it}]$ as the regressors of our model and $y_{it}$ as the dependent variable, which are both observable. Further define the composite error term $v_{it}=c_i+u_{it}$, which contains both a time-invariant term $c_i$ and a time-varying term $u_{it}$. Further define 
+    \label{equationline}
+\end{align}
 
 \subsubsection*{Pooled OLS}
-A naive approach to formulate an econometric model would be to use pooled OLS for the case when we define the composite error term $u_{it}=v_{it}+\epsilon_{it}$
-\begin{align*}
-    y_{it} &= \pmb{x}_{it} \pmb{\beta}  +u_{it} \\
-    \Leftrightarrow \pmb{x}_{it}'y_{it}&=\pmb{x}_{it}'\pmb{x}_{it}\pmb{\beta} +\pmb{x}_{it}'u_{it} \\
-    \Leftrightarrow \mathbb{E}[\pmb{x}_{it}'y_{it}] &=\mathbb{E}[\pmb{x}_{it}'\pmb{x}_{it}] \pmb{\beta}  + \mathbb{E}[\pmb{x}_{it}'u_{it}] \\ \Leftrightarrow  \pmb{\beta} &= (\mathbb{E}[\pmb{x}_{it}'\pmb{x}_{it}])^{-1} \left(  \mathbb{E}[\pmb{x}_{it}'y_{it}]-\mathbb{E}[\pmb{x}_{it}' u_{it}]\right)
-\end{align*}
-It is evident that identification of $\pmb{\beta}$ requires that the composite error $u_{it}$ is uncorrelated with the regressor. Unpacking the composite error such that $\mathbb{E}[\pmb{x}_{it}'u_{it}]=\mathbb{E}[\pmb{x}_{it}'v_{it}]+\mathbb{E}[\pmb{x}_{it}'\epsilon_{it}]$ shows that logged TFP (time-invariant unobservable) $v_{it}$ must be assumed uncorrelated with logged capital and logged employment (regressors) in addition to $\mathbb{E}[\pmb{x}_{it} \epsilon_{it}]=0$, to successfully identify $\pmb{\beta}$. An example of violation of $\mathbb{E}[\pmb{x}_{it}'v_{it}]=0$ would be if firms that have more capital (or employees) are generally more productive than firms with less capital (or less employees). This could be due to structural differences a.o. 
+The simplest possible estimator for panel data is the pooled OLS (POLS) estimator, which corresponds to OLS on the entire panel, considering each $(i,t)$ observation as i.i.d. In POLS, an attempt to identify $\pmb{\beta}$ results in the following:
+$$\pmb{\beta} = (\mathbb{E}[\pmb{x}_{it}'\pmb{x}_{it}])^{-1} \left(  \mathbb{E}[\pmb{x}_{it}'y_{it}]-\mathbb{E}[\pmb{x}_{it}' u_{it}]\right)$$
+Identification of $\pmb{\beta}$ requires that the composite error $u_{it}$ is uncorrelated with the regressors. Unpacking the composite error  such that $\mathbb{E}[\pmb{x}_{it}'u_{it}]=\mathbb{E}[\pmb{x}_{it}'\alpha_{i}]+\mathbb{E}[\pmb{x}_{it}'\epsilon_{it}]$ shows that both the time-varying and time-invariant part of TFP must be assumed uncorrelated with logged capital and logged employment to successfully identify $\pmb{\beta}$.
 
-If we were willing to assume $\mathbb{E}[\pmb{x}_{it}'v_{it}]=0$, then to estimate $\pmb{\beta}$ using pooled OLS, we would stack $y_{it}$ and $\pmb{x}_{it}$ over $(i,t)$ into matrices, obtaining $\pmb{X}$ and $\pmb{y}$, both two-dimensional of size $(NT,K)$ and $(NT,1)$ respectively.
-$$\hat{\pmb{\beta}} = (\pmb{X}' \pmb{X})^{-1}\pmb{X}'\pmb{y}$$
-However with a DGP as $\pmb{y}=\pmb{X}\pmb{\beta}+\pmb{v}+\pmb{\epsilon}$, we would obtain a biased estimate since:
-\begin{align*}
-    \hat{\pmb{\beta}} &= (\pmb{X}'\pmb{X})^{-1} (\pmb{X}'\pmb{X}\pmb{\beta} +\pmb{X}'\pmb{v}+\pmb{X}'\pmb{\epsilon})=\pmb{\beta}+\pmb{X}'\pmb{v} +\
-\end{align*}
-(Ser lige hvad jeg gør med det her afsnit, skal nok skærre fra, strømline)
+An example of violation of $\mathbb{E}[\pmb{x}_{it}'v_{it}]=0$ would be if firms that have more capital (or employees) are generally more productive than firms with less capital (or less employees). This could be due to structural differences a.o. Since we find this highly likely, we proceed to consider another estimator.
 
 \subsubsection*{Fixed Effects}
-We now proceed to consider another estimator, namely the fixed effects estimator. Firstly, the data is transformed by a within-transformation, which demeans the data. In that regard, we denote the time-demeaned data with double dots (mere elegant), which results in the following equation for our model $\forall \ t,i$.
-\begin{align*}
-    y_{it}-\bar{y}_{it} &= \beta(\pmb{x}_{it}-\bar{\pmb{x}}_{it})+(c_i-c_i)+(u_{it} - \bar{u}_{it}) \\
-    \ddot{y}_{it} &= \beta \ddot{\pmb{x}}_{it}+\ddot{u}_{it}
-\end{align*}
-We then consider the identification of $\beta$. Firstly, the data is stacked over time time-dimension (why is this smart?= så man slipper for at skrive summer) such that $\ddot{\pmb{y}}_{i}$ and $\ddot{\pmb{u}}_{i}$ are $T \times 1$ vectors and $\pmb{\ddot{X}}$ is a $T\times K$ matrix.
+The Fixed Effects (FE) estimator doesn't suffer from same identification issues as the POLS estimator. We show this by performing a within-transformation on \eqref{equationline}. For each firm $i$, we subtract the average (over $T$) dependent variable  on the LHS and the average (over $T$) regressors on the RHS.
+$$y_{it}-\bar{y}_{it} = \pmb{\beta}(\pmb{x}_{it}-\bar{\pmb{x}}_{it})+(\alpha_i-\alpha_i)+(u_{it} - \bar{u}_{it})$$
+In this way, the time-invariant TFP $\alpha_i$ cancels out. Defining demeaned version of the variable $v_{it}$ as $\ddot{v}_{it}=v_{it}-\frac{1}{T}\sum_{t=1}^T {v_{it}}=v_{it}-\bar{v}_{it}$, we get the new model:
+$$\ddot{y}_{it} = \pmb{\beta} \ddot{\pmb{x}}_{it}+\ddot{u}_{it}$$
+We then consider the identification of $\pmb{\beta}$. Firstly, the data is stacked over the time-dimension such that $\ddot{\pmb{y}}_{i}$ and $\ddot{\pmb{u}}_{i}$ are $T \times 1$ vectors and $\pmb{\ddot{X}}$ is a $T\times K$ matrix.
 \begin{align*}
     \ddot{\pmb{y}}_{i} &= \pmb{\ddot{X}}_{i} \pmb{\beta}  +\pmb{\ddot{u}}_{i} \\
     \Leftrightarrow \pmb{\ddot{X}}_{i}'\ddot{\pmb{y}}_{i}&=\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}\pmb{\beta} +\pmb{\ddot{X}}_{i}'\pmb{\ddot{u}}_{i} \\
@@ -50,39 +36,44 @@ We then consider the identification of $\beta$. Firstly, the data is stacked ove
 \end{align*}
 , i.e. we see that $\pmb{\beta}$ is exactly identified if we assume the following:
 \begin{enumerate}
-    \item \underline{Strict exogenity} $\mathbb{E}[\pmb{\ddot{u}}_{i}\vert \pmb{x}_{i1},\pmb{x}_{i2},\dots,\pmb{x}_{iT},c_i]=0$, which implies that the time-demeaned regressors and error terms are uncorrelated $\mathbb{E}[\pmb{\ddot{X}}_{i}' \pmb{\ddot{u}}_{i}]=0$ (derive + interpret?). 
-    \item the matrix $\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}]$ fulfills a \underline{ (full) rank condition} such that is has full rank, i.e. $rank(\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])=K$ and can be inverted. Interpret
+    \item[\textbf{FE.1}] \underline{Strict exogenity} $\mathbb{E}[\pmb{\ddot{u}}_{i}\vert \pmb{X}_i,\alpha_i]=0$, where $\pmb{X}_i$ is the non-demeaned $T \times K$ matrix of regressors in all periods for firm $i$.
+    This assumption implies that the time-demeaned regressors and error terms are uncorrelated $\mathbb{E}[\pmb{\ddot{X}}_{i}' \pmb{\ddot{u}}_{i}]=0$.
+    \item[\textbf{FE.2}] the matrix $\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}]$ fulfils a \underline{ (full) rank condition}, i.e. $rank(\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])=K$ and is therefore invertible. This assumption rules out multicollinearity between demeaned regressors.
 \end{enumerate}
-which would imply:
+Fulfilment of these two assumptions implies that $\pmb{\beta}$ is successfully identified:
 $$\mathbb{E}[\pmb{\ddot{X}}_{i}' \pmb{\ddot{u}}_{i}]= 0\Rightarrow \pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])^{-1} \mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{y}_{i}]$$
-Using the analogy principle, estimation of $\pmb{\beta}$ would result in the following estimator $\pmb{\hat{\beta}}_{FE}$, where we use that the expectation is over the individuals $i$.
+
+\subsubsection*{Estimation of FE estimator}
+
+Using the analogy principle, estimation of the identified $\pmb{\beta}$ under the assumptions of strict exogenity and full rank condition would result in the following estimate $\pmb{\hat{\beta}}_{FE}$. Note that the expectation is over the firms $i$ (and not $t$).
 $$\pmb{\hat{\beta}}_{FE}= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1}\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{y}}_{i} }$$
 
-With $\pmb{\ddot{X}}'\pmb{\ddot{X}}$, we obtain a $(K \times K)$ matrix, which, with a $(K \times 1)$ vector from $\pmb{\ddot{X'}}_{i} \pmb{\ddot{y}}_{i}$ results in a $(K \times 1)$ vector of the parameters.
+With $\pmb{\ddot{X}}'\pmb{\ddot{X}}$, we obtain a $(K \times K)$ matrix, which, with a $(K \times 1)$ vector from $\pmb{\ddot{X'}}_{i} \pmb{\ddot{y}}_{i}$ results in a $(K \times 1)$ vector $\pmb{\beta}$.
 
 \subsubsection*{Consistency of Fixed Effects estimator}
-Now, we turn to the consistency of the FE-estimator. Inserting $\pmb{\ddot{y}}_i$ in the expression for $\pmb{\hat{\beta}}_{FE}$, we obtain the following:
-\begin{align*}
-    \Rightarrow \pmb{\hat{\beta}}_{FE} &= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i}}\pmb{\ddot{X}}_{i} \pmb{\beta}+\pmb{\ddot{X'}}_{i}\pmb{\ddot{u}}_i \right) \\
-    &= \pmb{\beta} +\left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right)
-\end{align*}
-With FE.1 and 2, we can then we apply a Law of Large Numbers (LLN) such that $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}]$ and $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i}]$. Then we use Slutskys theorem: $p\text{-lim}\left( \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)^{-1}\right)=(\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1}$, which is allowed since the inverse matrix is defined, due to the rank assumption, and the inverse operator is a continuous function. Altogether, it implies that the FE-estimator $\pmb{\hat{\beta}}_{FE}$ is consistent, which is a first-order concern.
+Now, we turn to the consistency of the FE-estimator. Inserting $\pmb{\ddot{y}}_i$ in the expression for $\pmb{\hat{\beta}}_{FE}$, we obtain:
+\begin{align}
+    \Rightarrow \pmb{\hat{\beta}}_{FE} &= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i}}\pmb{\ddot{X}}_{i} \pmb{\beta}+\pmb{\ddot{X'}}_{i}\pmb{\ddot{u}}_i \right) \nonumber \\
+    &= \pmb{\beta} +\left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right) \label{FE-estimator}
+\end{align}
+Under FE.1 and FE.2, we can then we apply a Law of Large Numbers (LLN) such that $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}]$ and $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i}]=0$. Then we use Slutskys theorem: $p\text{-lim}\left( \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)^{-1}\right)=(\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1}$, which is allowed since the inverse matrix is defined, due to the rank assumption, and the inverse operator is a continuous function.
+$$p\text{-lim}(\pmb{\beta}_{FE})=\pmb{\beta} + \left( \mathbb{E}[\ddot{\pmb{X'}}_i \ddot{\pmb{X}}_i] \right)^{-1}*0 =\pmb{\beta}$$
 
 \subsubsection{Asymptotic normality of Fixed Effects estimator}
-When analysing our consistent FE-estimator, we need to know the asymptotic distribution of the parameter. Rearranging the equation from the former section, we get the following:
+For inference of the FE-estimator, the asymptotic distribution is needed. Rearranging \eqref{FE-estimator} gives the following:
 \begin{align*}
     \sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})&=  \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left( \frac{1}{\sqrt{N}} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right)
 \end{align*}
-From the former section, we saw that the Law of Large Numbers and Slutskys Theorem combined with our assumptions (strict exogeneity and full rank condition) implied that asymptotically $\mathbb{E}[\sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})]=\pmb{0}$. This means that the sum of real-valued i.i.d. r.v.s converges accordingly to the Central Limit Theorem such that $\left( \frac{1}{\sqrt{N}} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right)\rightarrow _d \text{N}(\pmb{0},\mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i(\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i)'])=^d \text{N}(\pmb{0},\mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i\pmb{\ddot{u}}_i'\pmb{\ddot{X}}_i])$.
+Earlier, we saw that FE.1 and FE.2 combined with LLN and Slutsky's theorem implied that asymptotically $\mathbb{E}[\sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})]=\pmb{0}$. This means that the sum of real-valued i.i.d. r.v.s converges accordingly to the Central Limit Theorem such that $\left( \frac{1}{\sqrt{N}} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right)\rightarrow _d \text{N}(\pmb{0},\mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i(\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i)'])=^d \text{N}(\pmb{0},\mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i\pmb{\ddot{u}}_i'\pmb{\ddot{X}}_i])$.
 
-Since we have convergence in probability $p\text{-lim}\left( \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)^{-1}\right)=(\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1}$ for the first term and convergence in distribution for the second term, the product rule implies that the expression for $\sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})$ converges only in the distributional sense such that:
+%%Since we have convergence in probability $p\text{-lim}\left( \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)^{-1}\right)=(\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1}$ for the first term and convergence in distribution for the second term, %%
+The product rule implies that the expression for $\sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})$ converges only in the distributional sense such that:
 $$\Rightarrow \sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta}) \sim \text{N} \left(\pmb{0},
 (\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1} \mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i\pmb{\ddot{u}}_i'\pmb{\ddot{X}}_i] (\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1} \right)$$
 
 \input{sections/meth/efficiency.tex}
 
 \subsubsection*{Wald-test}
-%(We could also test for joint significance for the year dummies) \newline
 %(Rækkefølgen skal ændres på, da nogle antagelser bruges i de tidligere underafsnit) \newline
 We utilise the Wald-test to test for CRS, where the null-hypothesis is $H_0: \mathbf{R}\boldsymbol{\beta}=\mathbf{r}$. Under weak regularity conditions - consistency of the FE estimator, asymptotic normality and $\mathbf{R}$ has full rank (\textit{refer to  consistency, and asymptotic normality equations}), the Wald statistic can be written as:
 
@@ -91,7 +82,7 @@ We utilise the Wald-test to test for CRS, where the null-hypothesis is $H_0: \ma
     W:=(\mathbf{R}\widehat{\boldsymbol{\beta}}-\mathbf{r})[\mathbf{R}\widehat{\text{Avar}(\widehat{\beta}_{FE})}\mathbf{R}']^{-1}(\mathbf{R} \boldsymbol{\widehat{\beta}}-\mathbf{r})
 \end{equation*}
 
-Under the $H_0$ the Wald statistic follows a $\chi^2_Q$ distribution. When testing for CRS we test $H_0:\beta_K+\beta_K=1$, where we have $Q=1$ degrees of freedom and  $\mathbf{R}$ is a $[1 \times K]$ matrix and $\textbf{r}=1 \times 1$ matrix, where $K$ is the rank $K=E[\textbf{x}'\textbf{x}]$  from assumption FE.2. Since we only test one linear hypothesis the Walt-statistic is simply the squared t-statistic (might be very overkill to state this mathematically, but in terms of our actual estimates:)
+Under the $H_0$ the Wald statistic follows a $\chi^2_Q$ distribution. When testing for CRS we test $H_0:\beta_K+\beta_L=1$, where we have $Q=1$ degrees of freedom and  $\mathbf{R}$ is a $[1 \times K]$ matrix and $\textbf{r}=1 \times 1$ matrix, where $K$ is the rank $K=E[\textbf{x}'\textbf{x}]$  from assumption FE.2. Since we only test one linear hypothesis the Walt-statistic is simply the squared t-statistic (might be very overkill to state this mathematically, but in terms of our actual estimates:)
 The null-hypothesis is given by  $H_0: \mathbf{R}\boldsymbol{\hat{\beta}}=\mathbf{r}\Leftrightarrow \begin{bmatrix}1&1 \end{bmatrix} \begin{bmatrix}\hat{\beta}_K\\ \hat{\beta}_L \end{bmatrix}=1$. Insert the estimated values for $\hat{\beta}$ and the Walt-statistic yields:
 \begin{equation*}
     W_{robust}= (\begin{bmatrix}1&1 \end{bmatrix} 
@@ -99,19 +90,39 @@ The null-hypothesis is given by  $H_0: \mathbf{R}\boldsymbol{\hat{\beta}}=\mathb
     \begin{bmatrix}
         0.001735 & -0.000727 \\ 
         -0.000727 & 0.0008968
-    \end{bmatrix} \begin{bmatrix}1&1 \end{bmatrix}-1]\approx19.403
+    \end{bmatrix} \begin{bmatrix}1&1 \end{bmatrix}-1]\approx 19.402912
 \end{equation*}
-To show the t-statistic is identical, we utilise the same assumptions used for the Walt-statistic to be valid. The general t-statistics properties are not 
-%Suppose we have a set of independent standard normal variables, $\{lcap,lemp\}$ denoted $Y_1,Y_2$ respectively. The sum of the squared variables follows a $\chi^2_1$ distribution: \begin{align*} \xi=\sum^2_{i=1}Y^2_i \longrightarrow\xi\sim \chi^2 \end{align*}
+If the assumptions for the Wald-test holds (assumptions FE.1-2 for $W_{robust}$), then the squared t-statistic, $t^2$, is equivalent to the Wald-statistic. The framework for one linear restriction is a little different, but remember the general t-statistic looks like:
 
+\begin{equation*}
+    t=\frac{\hat{\beta}-\beta}{se(\hat{\beta})}
+\end{equation*}
+The framework for testing a linear restriction when using a t-test is $H_0:\textbf{R}\boldsymbol{\beta}=\hat{\textbf{r}}$, where we estimate $\hat{\textbf{r}}$ instead of stating what it must be. From the null-hypothesis from the Wald-test we simply state $\textbf{r}=1$, but now we try to estimate $\hat{\textbf{r}}$, and the simple t-test setup looks like the classical t-test framework $H_0: \hat{\beta}=\beta\Rightarrow$
+\begin{align*}
+    H_0:\hat{\textbf{r}}&=\textbf{r}\Leftrightarrow \hat{\textbf{r}}=1\Leftrightarrow  \\
+     \textbf{R}\boldsymbol{\hat{\beta}}&=1\Leftrightarrow \hat{\beta}_K+\hat{\beta_L}=1
+\end{align*}
+We take $\beta\Rightarrow \textbf{r}$ as given because it is a value the statistician (we) declare $\textbf{r}=1$. Insert the framework into the t-statistic:
+\begin{equation*}
+    t=\frac{\hat{\beta}_K+\hat{\beta}_L-1}{se(\hat{\textbf{r}})}
+    \Leftrightarrow \frac{0.154620+0.694226-1}{0.001178}\approx-4.404874
+\end{equation*}
+And t squared $t^2=(-4.404873)^2\approx19.402906\approx W_{robust}=19.402912$. Differences is caused by rounding errors \textit{run the code for exact results}.
 
 (\textit{dette burde stå først}:) If we use normal standard errors, we require stronger assumptions where under assumption FE.3 the FE estimator is asymptotically efficient $\rightarrow$ we can use normal standard errors. If we relax assumption FE.3, or simply reject the null-hypothesis from a serial-correlation test, like a placebo test with an AR(1) model, (\textit{see section for serial correlation for this specific test}) we have to use robust standard errors. The only change in the Wald-statistic is the variance-covariance matrix $\text{Avar}(\hat{\beta}_{FE})$, where the robust variance-covariance matrix is given by the sandwich formula. \newline
 \textit{As seen under the efficiency section. We need to differentiate between the normal and robust version of Avar($\beta$)}.
 
-%(\textit{Currently we have used normal standard errors, but maybe we should consider clustered standard errors to account for within-firm serial correlation. I'll rewrite this, if we have implemented clustered into our results, but the implementation is not done in our exercises. Only normal and robust errors are implemented.}
+
 
 \subsubsection*{Serial correlation test}
-A test for serial correlation can imply several tests for any type of serial correlation. In this report we utilise an autoregressive process with one lag (AR(1)) to test whether there is a significance from a leading explanatory variable in t+1 on the auxiliary regression. This can be defined shown by:
+In this report we utilise an autoregressive process with one lag (AR(1)) to test for serial correlation in the error term. We use an auxilliary regression:
+\begin{equation*}
+    \hat{\ddot{u}}_{it}=\rho \hat{\ddot{u}}_{it-1}+\varepsilon_{it}
+\end{equation*}
+If $\hat{\ddot{u}}_{it-1}$has a significant impact on $\hat{\ddot{u}}_{it}$ it indicates a problem that the errors are correlated across (some) time. This warrants at least using robust standard errors, but since the time-demeaned errors are serially correlated, we have to use robust standard errors for the t-test/Wald-test to be valid. If there is arbitrary serial correlation, the t-statistic is not valid and since $\ddot{u}_{it},\ddot{u}_{it-1}$ is correlated (\textit{tends to 0 as T grows, so asymptotic properties are still exactly the same as always...)}. So using time-demeaned errors, we test for serial correlation in these errors by making the test robust to arbitrary serial correlation. The t-statistic will be valid, and if it still shows significance, it does indicate a problem. If this is the case we have to use robust standard errors in our model when estimating $\beta_K,\beta_K$, to be able to conduct valid tests.
+
+\subsubsection*{Strict exogeneity test???}
+
 
 \subsubsection*{Homoskedasticity (maybe)}
-
+No
