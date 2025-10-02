@@ -2,9 +2,17 @@
 
 The data consists of $N = 441$ French manufacturing firms over 12 years $(T=12)$ from 1968 to 1979, and is thus a panel data set with $NT = 5292$ observations. The data is balanced.  
 
-We perform the within transformation of our data matrices as described in the methodology section (Ref) and perform pooled OLS on (ref est eq). The estimates along with standard errors and t-values are reported in Table \ref{tab:estimates}. 
+We estimate the models using the methods outlined in Section \ref{sec:methodology}. The estimates along with robust standard errors are reported in Table \ref{tab:estimates}. Coefficient significance and sign are consistent between methods that is we find a positive partial effect on log deflated sales from increasing any of the inputs conditional on the unobserved heterogeneity, as one would except. With labor increases resulting in a factor $\approx 4.5$ and $\approx 8.7$ relative sales increase, in percent, respectively. 
 
 \input{tables/emp_estimates.tex}
+
+However, for the estimates to carry any meaning, at all, we must test whether assumptions \textbf{FE.1, FE.2} and \textbf{FD.1, FD.2} hold. 
+
+Table X reports the results of all misspecification tests as described in the latter part of Section \ref{sec:methodology}. 
+
+INPUT TABLE. 
+
+For the FE model we find that the strict exogeneity assumption is broken in which the $\hat{\beta}_{FE}$ is inconsistent, while the FD model, blah blah. Both models exhibit autocorrelated errors of at least degree one, why we use robust standard errors - such that the asymptotic variance estimator is still consistent, though not efficient, allowing valid inference, provided the \textbf{FE(D).1, FE(D).2}.
 
 Next we proceed to test the null hypothesis of constant returns to scale. From Table \ref{tab:wald}, we reject the null at the 1 \% significance level with a p-value of $\approx 0$. Thus, we conclude that the (Cobb-Douglas) production function does not exhibit constant returns to scale, for French manufacturing firms in the period 1968-1979. 
 
