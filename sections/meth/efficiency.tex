@@ -1,5 +1,9 @@
 \subsubsection*{Efficiency}
 
+\begin{itemize}
+    \item [\textbf{FE.3}:] \underline{Homoskedasticity}. For $\hat{\beta}$ to be efficient - smallest possible asymptotic variance - it must fulfill $\mathbb{E}(\bm{u}_i \bm{u}_i' | \bm{x}_i, c_i) = \mathbb{E}(\bm{u}_i \bm{u}_i') = \Omega_{u} = \sigma^2_u \bm{I}_T$, i.e. the error term $u_{it}$ is homoscedastic and serially uncorrelated.    
+\end{itemize}
+
 It follows, that for the FE estimator to be efficient - i.e. have the smallest possible (asymptotic) variance -, we need to make some assumptions regarding the variance of the idiosyncratic error term, $\varepsilon_{it}$. Specifically, we need that the variance is homoscedastic and not serially correlated, i.e. $\text{Var}(\varepsilon_{it}) = \sigma^2$ and $\text{Cov}(\varepsilon_{it}, \varepsilon_{is}) = 0$ for $t \neq s$, or in the stacked notation, that, $\Omega_{\bm{\varepsilon}} = \sigma^2 I_T$. This results in the following (ref Mikkels eq for asymptotic normality), 
 \begin{align*}
     \mathbb{E}\left[ \bm{\ddot{X}}_i^\prime \bm{u}_i \bm{u}_i^\prime \bm{\ddot{X}}_i \right] &= \mathbb{E}\left[ \bm{\ddot{X}}_i^\prime \mathbb{E}[\bm{u}_i \bm{u}_i^\prime | \bm{x}_i \alpha_i]\bm{\ddot{X}}_i \right] \\
