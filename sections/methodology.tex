@@ -10,9 +10,8 @@ where $y_{it} = \ln Y_{it}$ and so on. Suppose that $\ln A_{it}$ can be decompos
     y_{it} &= \beta_K k_{it} + \beta_L l_{it}+c_i + u_{it}
 \end{align*}
 We write the model on compact form by stacking the regressors in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)'$.
-\begin{align}
+\begin{align} \label{equationline}
     y_{it} = c_i + \bm{x}_{it} \bm{\beta} + u_{it}, \quad t=1,2,\ldots,8, \quad i=1,2,\ldots,441
-    \label{equationline}
 \end{align}
 
 \subsubsection*{Pooled OLS}
@@ -37,8 +36,8 @@ $$ \Rightarrow  \pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}]
 \end{enumerate}
 
 Estimation of $\pmb{\beta}$ under FE.1 and FE.2 using the analogy principle gives the following.
-\begin{equation}
-    \pmb{\hat{\beta}}_{FE}= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1}\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{y}}_{i} } \label{EstimationEq}
+\begin{equation} \label{EstimationEq}
+    \pmb{\hat{\beta}}_{FE}= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1}\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{y}}_{i} }
 \end{equation}
 , where we emphasize that the former expectation for the population is over the firms $i$ (and not $t$).
 
@@ -56,11 +55,11 @@ $$p\text{-lim}(\pmb{\hat{\beta}}_{FE})=\pmb{\beta} + \left( \mathbb{E}[\ddot{\pm
 
 \subsubsection*{Asymptotic normality of Fixed Effects estimator}
 Rearranging \eqref{EstimationEq} and using $\mathbb{E}[\sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})]=\pmb{0}$ under FE.1 and FE.2, we see that the sum of products of regressors and time-varying errors converge according to the Central Limit Theorem (CLT). The product rule then implies that the product of the two matrices converges (only) in distribution.
-\begin{align*}
-    \sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})&=  \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left( \frac{1}{\sqrt{N}} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right) 
-    \text{N} \rightarrow_d \left(\pmb{0},
+\begin{align} 
+    \sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta}) &=  \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left( \frac{1}{\sqrt{N}} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right) \notag
+    \xrightarrow{d} \text{N} \left(\pmb{0},
 (\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1} \mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i\pmb{\ddot{u}}_i'\pmb{\ddot{X}}_i] (\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1} \right)
-\end{align*}
+\end{align}
 
 %Earlier, we saw that FE.1 and FE.2 combined with LLN and Slutsky's theorem implied that asymptotically $\mathbb{E}[\sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})]=\pmb{0}$. This means that the sum of real-valued i.i.d. r.v.s converges accordingly to the Central Limit Theorem such that $\left( \frac{1}{\sqrt{N}} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right)\rightarrow _d \text{N}(\pmb{0},\mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i(\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i)'])=^d \text{N}(\pmb{0},\mathbb{E}[\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i\pmb{\ddot{u}}_i'\pmb{\ddot{X}}_i])$.
 
@@ -134,9 +133,9 @@ If $\hat{\ddot{u}}_{it-1}$has a significant impact on $\hat{\ddot{u}}_{it}$ it i
 
 To test for strict exogeneity we test whether any (is it any, or...?) $\bm{x_{is}}$ is correlated with $\bm{u}_{it}$ for $s \neq t$. This is most easily done by testing the significance of parameter estimates on leaded explanatory variables, $\bm{x}_{it+1}$, that is estimate, 
 \begin{align*}
-    y_{it} = \bm{x}_{it}\beta + \bm{w}_{it+1} \bm{\delta} + c_i + u_{it}
+    y_{it} = \bm{x}_{it} \bm{\beta} + \bm{w}_{it+1} \bm{\delta} + c_i + u_{it}
 \end{align*} 
-using FE, where $\bm{w}_{it+1} \subseteq \bm{x}_{it+1}$. Under strict exogeneity $\bm{\delta} = 0$, which is done by a regular t-test. Similarly for the FD model following \cite[Chapter~10]{wooldridgeEconometricAnalysisCross2010}. 
+using FE, where $\bm{w}_{it+1} \subseteq \bm{x}_{it+1}$. Under strict exogeneity $\bm{\delta} = 0$, which is done by a regular t-test. Similarly for the FD model we use $\Delta y_{it} = \Delta \bm{x}_{it} \bm{\beta} + \bm{w}_{it} \bm{\gamma} + \Delta u_{it}$, with $\bm{w}_{it} \subseteq \bm{x}_{it}$, following \cite[Chapter~10]{wooldridgeEconometricAnalysisCross2010}.
 
 \subsubsection*{Homoskedasticity}
 No

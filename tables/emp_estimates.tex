@@ -1,16 +1,43 @@
-\begin{table}[H] 
+% \begin{table}[htbp]
+% \centering
+% \caption{Estimation results}
+% \label{tab:estimates}
+% \begin{tabular}{lcc}
+% \hline
+%  & FE & FD \\
+% \hline
+% $\beta_L$ & $\underset{(0.0417)}{0.6942^{***}}$ & $\underset{(0.0292)}{0.5487^{***}}$ \\
+% $\beta_K$ & $\underset{(0.0299)}{0.1546^{***}}$ & $\underset{(0.0232)}{0.0630^{***}}$ \\
+% \hline
+% $(N,T)$   & (441, 8) & (441, 7) \\
+% $R^2$     & 0.477    & 0.165 \\
+% $\sigma^2$ & 0.018    & 0.014 \\
+% \hline
+% \end{tabular}
+
+% \begin{flushleft}
+% \footnotesize Notes: Standard errors in parentheses. 
+% $^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
+% \end{flushleft}
+% \end{table}
+
+\begin{table}[htbp]
 \centering
-\caption{Fixed Effects Regression Results}
-\begin{tabular}{lcccc}
-\toprule
- & $\beta$  & Se & t-values & p-value \\
-\midrule
-$\ell $  & 0.6942 & 0.0147 & 47.2447 & 0.0000 \\
-$k$ & 0.1546 & 0.0130 & 11.9311 & 0.0000 \\
-\midrule
-$R^2$ & \multicolumn{4}{l}{0.477} \\
-$\sigma^2$ & \multicolumn{4}{l}{0.018} \\
-\bottomrule
+\caption{Estimation results}
+\label{tab:estimates}
+\begin{tabular}{lcc|ccc}
+\hline
+Model & $\beta_L$ & $\beta_K$ & $(N,T)$ & $R^2$ & $\sigma^2$ \\
+\hline
+FE & $\underset{(0.0417)}{0.6942^{***}}$ & $\underset{(0.0299)}{0.1546^{***}}$ & (441, 12) & 0.477 & 0.018 \\
+FD & $\underset{(0.0292)}{0.5487^{***}}$ & $\underset{(0.0232)}{0.0630^{***}}$ & (441, 11) & 0.165 & 0.014 \\
+\hline
 \end{tabular}
-\label{tab:results}
+
+\begin{flushleft}
+\footnotesize Notes: Standard errors in parentheses. 
+$^{***}p<0.01$, $^{**}p<0.05$, $^{*}p<0.1$.
+\end{flushleft}
 \end{table}
+
+
