@@ -10,7 +10,7 @@ Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific 
     u_{it} &= \alpha_i + u_{it}, \\
     y_{it} &= \alpha_i + \beta_K k_{it} + \beta_L l_{it} + u_{it}
 \end{align*}
-Then stack the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)$. The model can then be written on compact form as,
+Then stack the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)'$. The model can then be written on compact form as,
 \begin{align}
     y_{it} = \alpha_i + \bm{x}_{it} \bm{\beta} + u_{it}.
     \label{equationline}
@@ -18,8 +18,8 @@ Then stack the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and 
 
 \subsubsection*{Pooled OLS}
 The simplest possible estimator for panel data is the pooled OLS (POLS) estimator, which corresponds to OLS on the entire panel, considering each $(i,t)$ observation as i.i.d. In POLS, an attempt to identify $\pmb{\beta}$ results in the following:
-$$\pmb{\beta} = (\mathbb{E}[\pmb{x}_{it}'\pmb{x}_{it}])^{-1} \left(  \mathbb{E}[\pmb{x}_{it}'y_{it}]-\mathbb{E}[\pmb{x}_{it}' u_{it}]\right)$$
-Identification of $\pmb{\beta}$ requires that the composite error $u_{it}$ is uncorrelated with the regressors. Unpacking the composite error  such that $\mathbb{E}[\pmb{x}_{it}'u_{it}]=\mathbb{E}[\pmb{x}_{it}'\alpha_{i}]+\mathbb{E}[\pmb{x}_{it}'\epsilon_{it}]$ shows that both the time-varying and time-invariant part of TFP must be assumed uncorrelated with logged capital and logged employment to successfully identify $\pmb{\beta}$.
+$$\pmb{\beta} = (\mathbb{E}[\pmb{x}_{it}'\pmb{x}_{it}])^{-1} \left(  \mathbb{E}[\pmb{x}_{it}'y_{it}]-\mathbb{E}[\pmb{x}_{it}' v_{it}]\right)$$
+Identification of $\pmb{\beta}$ requires that the composite error $u_{it}$ is uncorrelated with the regressors. Unpacking the composite error  such that $\mathbb{E}[\pmb{x}_{it}'v_{it}]=\mathbb{E}[\pmb{x}_{it}'\alpha_{i}]+\mathbb{E}[\pmb{x}_{it}'u_{it}]$ shows that both the time-varying and time-invariant part of TFP must be assumed uncorrelated with logged capital and logged employment to successfully identify $\pmb{\beta}$.
 
 An example of violation of $\mathbb{E}[\pmb{x}_{it}'v_{it}]=0$ would be if firms that have more capital (or employees) are generally more productive than firms with less capital (or less employees). This could be due to structural differences a.o. Since we find this highly likely, we proceed to consider another estimator.
 
@@ -36,7 +36,7 @@ We then consider the identification of $\pmb{\beta}$. Firstly, the data is stack
 \end{align*}
 , i.e. we see that $\pmb{\beta}$ is exactly identified if we assume the following:
 \begin{enumerate}
-    \item[\textbf{FE.1}] \underline{Strict exogenity} $\mathbb{E}[\pmb{\ddot{u}}_{i}\vert \pmb{X}_i,\alpha_i]=0$, where $\pmb{X}_i$ is the non-demeaned $T \times K$ matrix of regressors in all periods for firm $i$.
+    \item[\textbf{FE.1}] \underline{Strict exogenity} $\mathbb{E}[u_{it}\vert \pmb{x}_{i1},\pmb{x}_{i2}\dots,\pmb{x}_{iT},\alpha_i]=0$, where $\pmb{X}_i$ is the non-demeaned $T \times K$ matrix of regressors in all periods for firm $i$.
     This assumption implies that the time-demeaned regressors and error terms are uncorrelated $\mathbb{E}[\pmb{\ddot{X}}_{i}' \pmb{\ddot{u}}_{i}]=0$.
     \item[\textbf{FE.2}] the matrix $\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}]$ fulfils a \underline{ (full) rank condition}, i.e. $rank(\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])=K$ and is therefore invertible. This assumption rules out multicollinearity between demeaned regressors.
 \end{enumerate}
