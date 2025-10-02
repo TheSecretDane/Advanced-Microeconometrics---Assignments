@@ -3,16 +3,16 @@
 We start by taking logs of \eqref{eq:CD} to linearize it,
 \begin{align*}
     \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} \\
-    y_{it} &= \beta_K k_{it} + \beta_L l_{it} + \varepsilon_{it}, \quad \varepsilon_{it} = \ln A_{it}
+    y_{it} &= \beta_K k_{it} + \beta_L l_{it} + v_{it}, \quad v_{it} = \ln A_{it}
 \end{align*}
-Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific effects, $\alpha_i$ and add an idiosyncratic error, $u_{it}$, i.e. $\varepsilon_{it} = \alpha_i + u_{it}$. The model is then given by,
+where $y_{it} = \ln Y_{it}$ and so on. Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific effects, $\alpha_i$ and add an idiosyncratic error, $u_{it}$, i.e. $v_{it} = \alpha_i + u_{it}$. The model is then given by,
 \begin{align*}
-    u_{it} &= \alpha_i + u_{it}, \\
-    y_{it} &= \alpha_i + \beta_K k_{it} + \beta_L l_{it} + u_{it}
+    v_{it} &= c_i + u_{it}, \\
+    y_{it} &= c_i + \beta_K k_{it} + \beta_L l_{it} + u_{it}
 \end{align*}
 Then stack the RHS variables in the vector $\bm{x}_{it} = (k_{it}, l_{it})$ and the parameters in the vector $\bm{\beta} = (\beta_K, \beta_L)'$. The model can then be written on compact form as,
 \begin{align}
-    y_{it} = \alpha_i + \bm{x}_{it} \bm{\beta} + u_{it}.
+    y_{it} = c_i + \bm{x}_{it} \bm{\beta} + u_{it}, \quad t=1,2,\ldots,8, \quad i=1,2,\ldots,441
     \label{equationline}
 \end{align}
 
@@ -121,8 +121,13 @@ In this report we utilise an autoregressive process with one lag (AR(1)) to test
 \end{equation*}
 If $\hat{\ddot{u}}_{it-1}$has a significant impact on $\hat{\ddot{u}}_{it}$ it indicates a problem that the errors are correlated across (some) time. This warrants at least using robust standard errors, but since the time-demeaned errors are serially correlated, we have to use robust standard errors for the t-test/Wald-test to be valid. If there is arbitrary serial correlation, the t-statistic is not valid and since $\ddot{u}_{it},\ddot{u}_{it-1}$ is correlated (\textit{tends to 0 as T grows, so asymptotic properties are still exactly the same as always...)}. So using time-demeaned errors, we test for serial correlation in these errors by making the test robust to arbitrary serial correlation. The t-statistic will be valid, and if it still shows significance, it does indicate a problem. If this is the case we have to use robust standard errors in our model when estimating $\beta_K,\beta_K$, to be able to conduct valid tests.
 
-\subsubsection*{Strict exogeneity test???}
+\subsubsection*{Strict exogeneity}
 
+To test for strict exogeneity we test whether any (is it any, or...?) $\bm{x_{is}}$ is correlated with $\bm{u}_{it}$ for $s \neq t$. This is most easily done by testing the significance of parameter estimates on leaded explanatory variables, $\bm{x}_{it+1}$, that is estimate, 
+\begin{align*}
+    y_{it} = \bm{x}_{it}\beta + \bm{w}_{it+1} \bm{\delta} + c_i + u_{it}
+\end{align*} 
+using FE, where $\bm{w}_{it+1} \subseteq \bm{x}_{it+1}$. Under strict exogeneity $\bm{\delta} = 0$, which is done by a regular t-test. Similarly for the FD model following \cite[Chapter~10]{wooldridgeEconometricAnalysisCross2010}. 
 
-\subsubsection*{Homoskedasticity (maybe)}
+\subsubsection*{Homoskedasticity}
 No
