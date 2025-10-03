@@ -1,7 +1,8 @@
 \subsubsection*{Efficiency}
 
 \begin{itemize}
-    \item [\textbf{FE.3}:] \underline{Homoskedasticity}. For $\hat{\beta}$ to be efficient - have the smallest possible asymptotic variance - it must hold that $\mathbb{E}(\bm{u}_i \bm{u}_i' | \bm{x}_i, c_i) = \mathbb{E}(\bm{u}_i \bm{u}_i') = \Omega_{u} = \sigma^2_u \bm{I}_T$, i.e. the error term $u_{it}$ is homoscedastic and serially uncorrelated.    
+    \item [\textbf{FE.3}:] \underline{Homoskedasticity}. For $\hat{\beta}$ to be efficient - have the smallest possible asymptotic variance - it must hold that $\mathbb{E}(\bm{u}_i \bm{u}_i' | \bm{x}_i, c_i) = \mathbb{E}(\bm{u}_i \bm{u}_i') = \Omega_{u} = \sigma^2_u \bm{I}_T$, i.e. the error term $u_{it}$ is homoscedastic and serially uncorrelated. 
+    \item [\textbf{FD.3}:] Similarly for $\hat{\beta}_{FD}$ to be efficient we need $\mathbb{E}(\bm{e}_i \bm{e}_{i}'|\bm{x}_i, c_i) = \sigma^{2}_{e} \bm{I}_{T-1}$  
 \end{itemize}
 % This results in the following from \eqref{ eq:asympnormal} using the LIT, 
 % \begin{align*}
@@ -21,4 +22,4 @@ If any of these assumptions do not hold, as we will see, we can still obtain con
 \begin{align*}
     \hat{\text{Avar}}(\hat{\beta}_{FE}) = \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1} \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \hat{\ddot{\bm{u}}}_i \hat{\ddot{\bm{u}}}_i^\prime \bm{\ddot{X}}_i \right) \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1}
 \end{align*} 
-which is consistent under \textit{just} \textbf{FE.1, FE.2}. 
+which is consistent under \textit{just} \textbf{FE.1, FE.2}, and similarly for the FD estimator.
