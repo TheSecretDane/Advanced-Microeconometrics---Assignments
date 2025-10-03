@@ -45,9 +45,9 @@ def estimate(
     if robust_se:
         cov, se = robust(x, residual, T)
     t_values = b_hat/se
-    
-    names = ['b_hat', 'se', 'sigma2', 't_values', 'R2', 'cov']
-    results = [b_hat, se, sigma2, t_values, R2, cov]
+
+    names = ['b_hat', 'se', 'sigma2', 't_values', 'R2', 'cov', 'residuals']
+    results = [b_hat, se, sigma2, t_values, R2, cov, residual]
     return dict(zip(names, results))
 
     
@@ -280,12 +280,11 @@ def fd_matrix(T):
     D_T = D_T[1:]
     return D_T 
 
-# On differenced data no matter what! 
-def serial_corr(y, x, T):
+def serial_corr(y: np.ndarray, x: np.ndarray, T: int, model: str = "fe") -> dict:
     # Calculate the residuals
     b_hat = est_ols(y, x)
     e = y - x@b_hat
-    
+
     # Create a lag transformation matrix
     L_T = np.eye(T, k=-1)
     L_T = L_T[1:]
@@ -301,4 +300,7 @@ def serial_corr(y, x, T):
     e = perm(I_T, e)
     
     # Calculate the serial correlation
-    return estimate(e, e_l,T=T-1)
+    if model == "fe":
+        return estimate(e, e_l,T=T-1, robust_se=True)
+    else:
+        return estimate(e, e_l,T=T-1)
