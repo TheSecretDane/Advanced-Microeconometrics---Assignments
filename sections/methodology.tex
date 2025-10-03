@@ -3,9 +3,9 @@
 We start by taking logs of \eqref{eq:CD} to linearize it,
 \begin{align*}
     \ln Y_{it} &= \ln A_{it} + \beta_K \ln K_{it} + \beta_L \ln L_{it} \quad \Longrightarrow
-    y_{it} = \beta_K k_{it} + \beta_L l_{it} + \varepsilon_{it}, \quad \varepsilon_{it} = \ln A_{it}
+    y_{it} = \beta_K k_{it} + \beta_L l_{it} + v_{it}, \quad v_{it} = \ln A_{it}
 \end{align*}
-where $y_{it} = \ln Y_{it}$ and so on. Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific effect, $c_i$ and add an idiosyncratic error, $u_{it}$, such that the composite error is $v_{it} = c_i + u_{it}$. Our model can then be written as:
+where $y_{it} = \ln Y_{it}$ and so on. Suppose that $\ln A_{it}$ can be decomposed into a time-invariant firm-specific effect, $c_i$ and add an idiosyncratic error, $u_{it}$, such that the composite error is $\ln A_{it}=v_{it} = c_i + u_{it}$. Our model can then be written as:
 \begin{align*}
     y_{it} &= \beta_K k_{it} + \beta_L l_{it}+c_i + u_{it}
 \end{align*}
@@ -19,15 +19,15 @@ All distributional results are based on fixed $T$ large $N$ asymptotic approxima
 \subsubsection*{Pooled OLS}
 The pooled OLS (POLS) estimator performs OLS on the entire panel, treating each $(i,t)$ observation as i.i.d. In POLS, identification of $\pmb{\beta}$ requires  $\mathbb{E}[\pmb{x}_{it}'v_{it}]=\mathbb{E}[\pmb{x}_{it}'\alpha_{i}]+\mathbb{E}[\pmb{x}_{it}'u_{it}]=0$.
 %In the context of the data, both the time-varying and time-invariant part of TFP must then be assumed uncorrelated with both the log of capital and employment.
-An example of $\mathbb{E}[\pmb{x}_{it}'v_{it}]\neq0$ is that if there is some firm-specific effect on the log of sales that correlates with the log of capital or employment, i.e. $\mathbb{E}[\pmb{x}_{it}'c_{i}]\neq0$. Since we find this likely, we consider the class of Fixed Effects Methods to alleviate the omitted variable problem in POLS.
+An example of $\mathbb{E}[\pmb{x}_{it}'v_{it}]\neq0$ is that if there is some firm-specific effect, say the TFP level from our Cobb-Douglas production function, on the log of sales, it will correlate with the log of capital and/or employment, i.e. $\mathbb{E}[\pmb{x}_{it}'c_{i}]\neq0$. Therefore we consider the class of Fixed Effects Methods to alleviate the omitted variable problem in POLS.
 
 \subsubsection*{Fixed Effects and First Differences}
-The Fixed Effects (FE) and First Differences (FD) estimators doesn't suffer from same identification issues as the POLS estimator. We show this for FE by performing a within-transformation on \eqref{equationline} and generalize for FD. For each firm $i$, we subtract the average (over $T$) dependent variable  on the LHS and the average (over $T$) regressors on the RHS. In this way, the time-invariant TFP $\alpha_i$ cancels out. Define the demeaned variable as $ \ddot{y}_{it}, \pmb{\ddot{x}}_{it}, \ddot{u}_{it}$.
+The Fixed Effects (FE) and First Differences (FD) estimators doesn't suffer from same identification issues as the POLS estimator. We show this for FE by performing a within-transformation on \eqref{equationline} and generalize for FD. For each firm $i$, we subtract the average (over $T$) dependent variable  on the LHS and the average (over $T$) regressors on the RHS. In this way, the time-invariant TFP $c_i$ cancels out. Define the demeaned variable as $ \ddot{y}_{it}, \pmb{\ddot{x}}_{it}, \ddot{u}_{it}$.
 \begin{align*}
     y_{it}-\bar{y}_{i} &=(\pmb{x}_{it}-\bar{\pmb{x}}_{i}) \pmb{\beta}+(c_i-c_i)+(u_{it} - \bar{u}_{i}) \\
     \ddot{y}_{it} &=  \ddot{\pmb{x}}_{it} \pmb{\beta}+\ddot{u}_{it}
 \end{align*}
-Identification of $\pmb{\beta}$ is considered. For simplicity, we stack the data over the time-dimension such that $\ddot{\pmb{y}}_{i}$ and $\ddot{\pmb{u}}_{i}$ are $T \times 1$ vectors and $\pmb{\ddot{X}}$ is a $T\times K$ matrix. Using the model equation, premultiplying $\pmb{\ddot{X}}_{i}$, taking expectations and rearranging, we get the following.
+and analogous for FD with $\Delta y_{it}=\Delta\textbf{}$Identification of $\pmb{\beta}$ is considered. For simplicity, we stack the data over the time-dimension such that $\ddot{\pmb{y}}_{i}$ and $\ddot{\pmb{u}}_{i}$ are $T \times 1$ vectors and $\pmb{\ddot{X}}$ is a $T\times K$ matrix. Using the model equation, premultiplying $\pmb{\ddot{X}}_{i}$, taking expectations and rearranging, we get the following.
 $$ \Rightarrow  \pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])^{-1} \left(  \mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{y}}_{i}]-\mathbb{E}[\pmb{\ddot{X}}_{i}' \pmb{\ddot{u}}_{i}]\right)$$
 , i.e. we see that $\pmb{\beta}$ is identified as $\pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])^{-1} \mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{y}_{i}]$ if we assume the following:
 \begin{enumerate}
@@ -120,11 +120,11 @@ H_A & : \beta_K+\beta_L \neq 1
 If the assumptions for the Wald-test holds we also see the squared $t$-statistic, $t^2$, is equivalent to the Wald-statistic: $t^2=(\frac{\textbf{R}\bm{\hat\beta}-1}{se(\bm{\hat\beta})})^2$ where  $\text{se}(\bm{\hat\beta})=\sqrt{\text{Avar}(\hat\beta_K)+\text{Avar}(\hat\beta_L)+2\text{ACov}({\hat\beta_K,\hat\beta_L}})$. For a joint test this pattern follows a $F$-distribution, not a squared $t$-distribution. This is important because in the strict exogeneity test for the FE and FD models it also tests for joint significance in their leaded terms, where we test for two linear restrictions.
 
 \subsubsection*{Serial correlation test}
-We utilise an autoregressive process with one lag (AR(1)) to test for serial correlation in the error term by using an auxilliary regression:
+We utilise an autoregressive process with one lag (AR(1)) to test for serial correlation in the error termby using an auxilliary regression:
 \begin{equation*}
     \hat{\ddot{u}}_{it}=\rho \hat{\ddot{u}}_{it-1}+\varepsilon_{it}
 \end{equation*}
-If $\hat{\ddot{u}}_{it-1}$has a significant impact on $\hat{\ddot{u}}_{it}$ it warrants at minimal using cluster robust standard errors. Since time-demeaned errors are by structure serially correlated, they die out under asymptotic properties when $T\rightarrow \infty$ for the FE model. This is \textit{not} for the case for the FD model, since $\text{Corr}(\Delta u_{it},\Delta u_{it-1})=-0.5$ if FE.3 holds (\cite[Chapter~10.6.3]{wooldridgeEconometricAnalysisCross2010}).
+If $\hat{\ddot{u}}_{it-1}$ has a significant impact on $\hat{\ddot{u}}_{it}$ it warrants at minimal using cluster robust standard errors. While time-demeaned errors are by structure serially correlated, $\text{corr}(\hat{\ddot{u}}_{it}, \hat{\ddot{u}}_{it}) = -1/(T-1), \forall s \neq t$, under FE.3, it dies out under asymptotic properties when $T\rightarrow \infty$ for the FE model. This is \textit{not} for the case for the FD model, since $\text{Corr}(\Delta u_{it},\Delta u_{it-1})=-0.5$ if FE.3 holds (\cite[Chapter~10.6.3]{wooldridgeEconometricAnalysisCross2010}). 
 
 %we in both cases have to use cluster robust errors that accounts for arbitrary serial correlation.  If there is arbitrary serial correlation, the t-statistic is not valid and since $\ddot{u}_{it},\ddot{u}_{it-1}$ is correlated (\textit{tends to 0 as T grows, so asymptotic properties are still exactly the same as always...)}. So using time-demeaned errors, we test for serial correlation in these errors by making the test robust to arbitrary serial correlation. The t-statistic will be valid, and if it still shows significance, it does indicate a problem. If this is the case we have to use robust standard errors in our model when estimating $\beta_K,\beta_K$, to be able to conduct valid tests.
 
