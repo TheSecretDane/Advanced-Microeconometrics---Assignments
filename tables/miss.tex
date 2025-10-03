@@ -1,0 +1,22 @@
+\begin{table}[H]
+\centering
+\caption{Strict exogeneity tests}
+\label{tab:strict_exog_test}
+\begin{tabular}{lcccccc}
+\hline
+ & $\text{FE}_1$ & $\text{FE}_2$ & $\text{FE}_3$ & $\text{FD}_1$ & $\text{FD}_2$ & $\text{FD}_3$ \\
+\hline
+$\beta_L$ & $\underset{(0.0231)}{0.5681^{***}}$ & $\underset{(0.0162)}{0.6479^{***}}$ & $\underset{(0.0431)}{0.5408^{***}}$ & $\underset{(0.0294)}{0.5484^{***}}$ & $\underset{(0.0294)}{0.5473^{***}}$ & $\underset{(0.0293)}{0.5483^{***}}$ \\
+$\beta_K$ & $\underset{(0.0134)}{0.1495^{***}}$ & $\underset{(0.0231)}{0.0210}$ & $\underset{(0.0375)}{0.0280}$ & $\underset{(0.0232)}{0.0629^{**}}$ & $\underset{(0.0234)}{0.0612^{**}}$ & $\underset{(0.0241)}{0.0565^{**}}$ \\
+$\delta_L$ & $\underset{(0.0225)}{0.1532^{***}}$ & -- & $\underset{(0.0283)}{0.1419^{***}}$ & $\underset{(0.0011)}{-0.0002}$ & -- & $\underset{(0.0030)}{0.0045}$ \\
+$\delta_K$ & -- & $\underset{(0.0258)}{0.1793^{***}}$ & $\underset{(0.0457)}{0.1667^{***}}$ & -- & $\underset{(0.0009)}{-0.0009}$ & $\underset{(0.0026)}{-0.0046^{*}}$ \\
+\hline
+$H_0: \delta_L = \delta_K = 0$ &  &  & $\underset{p=0.000}{44.111}$ &  &  & $\underset{p=0.182}{3.406}$ \\
+\hline
+\end{tabular}
+
+\begin{flushleft}\footnotesize
+Notes: Robust standard errors in parentheses. ${}^{***}p<0.01$, ${}^{**}p<0.05$, ${}^{*}p<0.10$.  
+“Joint test” reports the Wald statistic for the joint significance of $\delta_L$ and $\delta_K$ in columns $\text{FE}_3$ and $\text{FD}_3$; the $p$-value is shown below each statistic using $\underset{\cdot}{\cdot}$. The Wald test is asymptotically $\chi^2(2)$ under the null of two linear restrictions $\delta_L=\delta_K=0$.
+\end{flushleft}
+\end{table}
