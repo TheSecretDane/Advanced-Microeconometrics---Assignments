@@ -2,39 +2,36 @@
 
 The data consists of $N = 441$ French manufacturing firms over 12 years $(T=12)$ from 1968 to 1979, and is thus a panel data set with $NT = 5292$ observations. The data is balanced.  
 
-We estimate the models using the methods outlined in Section \ref{sec:methodology}. The estimates along with robust standard errors are reported in Table \ref{tab:estimates}. Coefficient significance and sign are consistent between methods that is we find a positive partial effect on log deflated sales from increasing any of the inputs conditional on the unobserved heterogeneity, as one would except. With labor increases resulting in a factor $\approx 4.5$ and $\approx 8.7$ relative sales increase, in percent, respectively. 
+We estimate the models using the methods outlined in Section \ref{sec:methodology}. Table \ref{tab:autocorr_tests} reports the results of the autocorrelation tests as described in Section \ref{sec:methodology}. Both models exhibit significant first-order autocorrelation additional to the structurally induced autocorrelation implied by the transformations, and as such we use robust standard errors  - to ensure consistent variance estimation. The estimates along with robust standard errors are reported in Table \ref{tab:estimates}. Coefficient significance and sign are consistent between methods that is we find a positive partial effect on log deflated sales from increasing any of the inputs conditional on the unobserved heterogeneity, as one would except. With labor increases resulting in a factor $\approx 4.5$ and $\approx 8.7$ relative sales increase, in percent, respectively. 
 
 \input{tables/emp_estimates.tex}
 
-However, for the estimates to carry any meaning, at all, we must test whether assumptions \textbf{FE(D).1} hold. 
-
-Table \ref{tab:autocorr_tests} reports the results of the autocorrelation tests as described in Section \ref{sec:methodology}. Both models exhibit significant first-order autocorrelation additional to the structurally induced autocorrelation implied by the transformations, and as such we use robust standard errors throughout.
-
-Table \ref{tab:strict_exog_test} reports the results of all strict exogeneity tests as described in the latter part of Section \ref{sec:methodology}.
+However, for the estimates to carry any meaning, at all, we must test whether assumptions \textbf{FE(D).1} hold. Table \ref{tab:strict_exog_test} reports the results of all strict exogeneity tests as described in the latter part of Section \ref{sec:methodology}.
 
 \input{tables/autocorr.tex}
 
-We test strict exogeneity by adding leads of the regressors. In the FE specifications all subsets of $\bm{\ddot{x}_{it+1}}$ are significant, whereas none of the $\bm{x_{it}}$ subsets are significant in the FD specifications (note the distinction between transformed leaded variables and levels in the FE vs FD case). Consequently, we reject strict exogeneity for the FE model and fail to reject it for the FD model. The joint tests test the linear hypothesis 
+We test strict exogeneity by adding leads of the regressors. In the FE specifications all subsets of $\bm{\ddot{x}_{it+1}}$ are significant, whereas none of the $\bm{x_{it}}$ subsets are significant in the FD specifications (note the distinction between transformed leaded variables and levels in the FE vs FD  as per \cite{wooldridgeEconometricAnalysisCross2010}). Consequently, we would reject strict exogeneity for the FE model and fail to reject it for the FD model. The hypothesis for the joint tests are, 
 \begin{align*}
     \bm{R} \bm{\beta} = \bm{r} \Longrightarrow = \begin{bmatrix}
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1
 \end{bmatrix} \begin{bmatrix}
-\beta_L \\ \beta_K \\ \gamma_{L+1} \\ \gamma_{K+1}
+\beta_L \\ \beta_K \\ \delta_{L} \\ \delta_{K}
 \end{bmatrix} = \begin{bmatrix}
 0 \\ 0
-\end{bmatrix} 
+\end{bmatrix} \\
+H_0: \delta_L = \delta_K = 0 \quad \text{vs} \quad H_A: \text{any } \delta_i \neq 0, i=L, K
 \end{align*}
-This implies that $\hat{\beta}_{\text{FE}}$ is inconsistent, while $\hat{\beta}_{\text{FD}}$ is consistent under the usual regularity conditions, and for further inference we should rely on the FD model. The full set of results is reported in Table~\ref{tab:strict_exog_test}. 
+This suggests that the strict exogeneity assumption on the \textit{population} might not hold, such that both $\hat{\beta}_{\text{FE}}$ and $\hat{\beta}_{\text{FD}}$ are inconsistent, even if one finite sample model suggests otherwise which simply could be due to the violation having a certain structure which might get washed out in the transformation(s). The full set of results is reported in Table~\ref{tab:strict_exog_test}. 
 
 \input{tables/miss.tex}
 
-Turning to residual dynamics, both FE and FD residuals exhibit at least first-order serial correlation (see Table~\ref{tab:autocorr_tests}). We therefore report robust standard errors so that the asymptotic variance estimator remains consistent (though not efficient), allowing valid inference provided \textbf{FE(D).1} and \textbf{FE(D).2} hold.
+\hline 
 
 Lastly we proceed to test the null hypothesis of constant returns to scale. From Table \ref{tab:wald}, we reject the null at the 1 \% significance level with a p-value of $\approx 0$. Thus, we conclude that the (Cobb-Douglas) production function does not exhibit constant returns to scale, for French manufacturing firms in the period 1968-1979. 
 
 \input{tables/wald_crs.tex}
 
-In addition one might want to test whether the production function exhibits increasing or decreasing returns to scale. This can be done by testing the null hypothesis of $\beta_K + \beta_L \geq 1$ against the alternative of $\beta_K + \beta_L < 1$ (decreasing returns to scale) or vice versa for increasing returns to scale. Importantly we need to consider that the test includes the boundary i.e. $\beta_K + \beta_L = 1$ such that we cant draw a conclusion if the null is accepted, which is why the tests are read somewhat opposite of what one might expect. One might suspect that this particular sector exhibits increasing returns to scale, as firms in manufacturing often benefit from economies of scale, which indeed is the case as seen from Table \ref{tab:rts_tests}.
+In addition one might be interested in testing whether the production function exhibits increasing or decreasing returns to scale. This can be done by testing the null hypothesis of $\beta_K + \beta_L \geq 1$ against the alternative of $\beta_K + \beta_L < 1$ (decreasing returns to scale) or vice versa for increasing returns to scale. Importantly we need to consider that the test includes the boundary i.e. $\beta_K + \beta_L = 1$ under the null such that we cant draw a conclusion if the null is not rejected, which is why the tests are read somewhat opposite of what one might expect. One might suspect that this particular sector exhibits increasing returns to scale, as firms in manufacturing often benefit from economies of scale, which indeed is the case as seen from Table \ref{tab:rts_tests}.
 
 \input{tables/one_sided_wald.tex}
