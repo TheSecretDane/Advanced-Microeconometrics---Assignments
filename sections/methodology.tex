@@ -19,7 +19,7 @@ All distributional results are based on fixed $T$ large $N$ asymptotic approxima
 \subsubsection*{Pooled OLS}
 The pooled OLS (POLS) estimator performs OLS on the entire panel, treating each $(i,t)$ observation as i.i.d. In POLS, identification of $\pmb{\beta}$ requires  $\mathbb{E}[\pmb{x}_{it}'v_{it}]=\mathbb{E}[\pmb{x}_{it}'\alpha_{i}]+\mathbb{E}[\pmb{x}_{it}'u_{it}]=0$.
 %In the context of the data, both the time-varying and time-invariant part of TFP must then be assumed uncorrelated with both the log of capital and employment.
-An example of $\mathbb{E}[\pmb{x}_{it}'v_{it}]\neq0$ is that if there is some firm-specific effect, say the TFP level from our Cobb-Douglas production function, on the log of sales, it will correlate with the log of capital and/or employment, i.e. $\mathbb{E}[\pmb{x}_{it}'c_{i}]\neq0$. Therefore we consider the class of Fixed Effects Methods to alleviate the omitted variable problem in POLS.
+An example of $\mathbb{E}[\pmb{x}_{it}'v_{it}]\neq0$ is that if there is some firm-specific effect, say the TFP level from our Cobb-Douglas production function on the log of sales, it will correlate with the log of capital and/or employment, i.e. $\mathbb{E}[\pmb{x}_{it}'c_{i}]\neq0$. Therefore we consider the class of Fixed Effects Methods to alleviate the omitted variable problem in POLS.
 
 \subsubsection*{Fixed Effects and First Differences}
 The Fixed Effects (FE) and First Differences (FD) estimators doesn't suffer from same identification issues as the POLS estimator. We show this for FE by performing a within-transformation on \eqref{equationline} and generalize for FD. For each firm $i$, we subtract the average (over $T$) dependent variable  on the LHS and the average (over $T$) regressors on the RHS. In this way, the time-invariant TFP $c_i$ cancels out. Define the demeaned variable as $ \ddot{y}_{it}, \pmb{\ddot{x}}_{it}, \ddot{u}_{it}$.
@@ -27,7 +27,7 @@ The Fixed Effects (FE) and First Differences (FD) estimators doesn't suffer from
     y_{it}-\bar{y}_{i} &=(\pmb{x}_{it}-\bar{\pmb{x}}_{i}) \pmb{\beta}+(c_i-c_i)+(u_{it} - \bar{u}_{i}) \\
     \ddot{y}_{it} &=  \ddot{\pmb{x}}_{it} \pmb{\beta}+\ddot{u}_{it}
 \end{align*}
-and analogous for FD with $\Delta y_{it}=\Delta\textbf{}$Identification of $\pmb{\beta}$ is considered. For simplicity, we stack the data over the time-dimension such that $\ddot{\pmb{y}}_{i}$ and $\ddot{\pmb{u}}_{i}$ are $T \times 1$ vectors and $\pmb{\ddot{X}}$ is a $T\times K$ matrix. Using the model equation, premultiplying $\pmb{\ddot{X}}_{i}$, taking expectations and rearranging, we get the following.
+and analogous for FD with $\Delta y_{it}=\Delta \pmb{x}_{it}\pmb{\beta}+\Delta u_{it}$ where $\Delta \pmb{x}_{it}=\pmb{x}_{it}-\pmb{x}_{it-1}$ and so on. Correct identification i assumed, for unbiased estimation of $\pmb{\beta}$. For simplicity, we stack the data over the time-dimension such that $\ddot{\pmb{y}}_{i}$ and $\ddot{\pmb{u}}_{i}$ are $T \times 1$ vectors and $\pmb{\ddot{X}}$ is a $T\times K$ matrix. Using the model equation, premultiplying $\pmb{\ddot{X}}_{i}$, taking expectations and rearranging, we get the following.
 $$ \Rightarrow  \pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])^{-1} \left(  \mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{y}}_{i}]-\mathbb{E}[\pmb{\ddot{X}}_{i}' \pmb{\ddot{u}}_{i}]\right)$$
 , i.e. we see that $\pmb{\beta}$ is identified as $\pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])^{-1} \mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{y}_{i}]$ if we assume the following:
 \begin{enumerate}
