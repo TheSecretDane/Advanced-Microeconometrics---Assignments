@@ -6,15 +6,21 @@ We estimate the models using the methods outlined in Section \ref{sec:methodolog
 
 \input{tables/emp_estimates.tex}
 
-However, for the estimates to carry any meaning, at all, we must test whether assumptions \textbf{FE.1, FE.2} and \textbf{FD.1, FD.2} hold. 
+However, for the estimates to carry any meaning, at all, we must test whether assumptions \textbf{FE(D).1} hold. 
 
-Table X reports the results of all misspecification tests as described in the latter part of Section \ref{sec:methodology}. 
+Table \ref{tab:autocorr_tests} reports the results of the autocorrelation tests as described in Section \ref{sec:methodology}. Both models exhibit significant first-order autocorrelation additional to the structurally induced autocorrelation implied by the transformations, and as such we use robust standard errors throughout.
 
-INPUT TABLE. 
+Table \ref{tab:strict_exog_test} reports the results of all strict exogeneity tests as described in the latter part of Section \ref{sec:methodology}.
 
-For the FE model we find that the strict exogeneity assumption is broken in which the $\hat{\beta}_{FE}$ is inconsistent, while the FD model, blah blah. Both models exhibit autocorrelated errors of at least degree one, why we use robust standard errors - such that the asymptotic variance estimator is still consistent, though not efficient, allowing valid inference, provided the \textbf{FE(D).1, FE(D).2}.
+\input{tables/autocorr.tex}
 
-Next we proceed to test the null hypothesis of constant returns to scale. From Table \ref{tab:wald}, we reject the null at the 1 \% significance level with a p-value of $\approx 0$. Thus, we conclude that the (Cobb-Douglas) production function does not exhibit constant returns to scale, for French manufacturing firms in the period 1968-1979. 
+We test strict exogeneity by adding leads of the regressors. In the FE specifications all subsets of $\bm{\ddot{x}_{it+1}}$ are significant, whereas none of the $x_{it}$ subsets are significant in the FD specifications. Consequently, we reject strict exogeneity for the FE model and fail to reject it for the FD model. This implies that $\hat{\beta}_{\text{FE}}$ is inconsistent, while $\hat{\beta}_{\text{FD}}$ is consistent under the usual regularity conditions, and for further inference we should rely on the FD model. The full set of results is reported in Table~\ref{tab:strict_exog_test}. 
+
+\input{tables/miss.tex}
+
+Turning to residual dynamics, both FE and FD residuals exhibit at least first-order serial correlation (see Table~\ref{tab:autocorr_tests}). We therefore report robust standard errors so that the asymptotic variance estimator remains consistent (though not efficient), allowing valid inference provided \textbf{FE(D).1} and \textbf{FE(D).2} hold.
+
+Lastly we proceed to test the null hypothesis of constant returns to scale. From Table \ref{tab:wald}, we reject the null at the 1 \% significance level with a p-value of $\approx 0$. Thus, we conclude that the (Cobb-Douglas) production function does not exhibit constant returns to scale, for French manufacturing firms in the period 1968-1979. 
 
 \input{tables/wald_crs.tex}
 

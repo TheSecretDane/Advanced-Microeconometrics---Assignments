@@ -1,0 +1,22 @@
+\begin{table}[H]
+\centering
+\caption{Serial correlation tests on residuals}
+\label{tab:autocorr_tests}
+\begin{tabular}{lcc}
+\hline
+ & $\text{FD}$ & $\text{FE}$ \\
+\hline
+Lag residual ($\hat{e}_{it-1}$ / $\hat{\ddot{u}}_{it-1}$)
+  & $\underset{(0.0148)}{-0.1987^{***}}$
+  & $\underset{(0.0123)}{0.5316^{***}}$ \\
+$t$-stat & -13.4493 & 43.2811 \\
+\hline
+\end{tabular}
+
+\begin{flushleft}\footnotesize
+Notes: Each column reports a regression of residuals on their first lag:
+$\hat{e}_{it}=\rho \hat{e}_{it-1}+v_{it}$ for first-differenced (FD) residuals and
+$\hat{\ddot{u}}_{it}=\rho \hat{\ddot{u}}_{it-1}+v_{it}$ for fixed-effects (FE) residuals.
+Robust standard errors in parentheses. ${}^{***}p<0.01$.
+\end{flushleft}
+\end{table}

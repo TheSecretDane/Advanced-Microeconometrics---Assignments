@@ -14,7 +14,7 @@ We write the model on compact form by stacking the regressors in the vector $\bm
     y_{it} = c_i + \bm{x}_{it} \bm{\beta} + u_{it}, \quad t=1,2,\ldots,8, \quad i=1,2,\ldots,441
 \end{align}
 
-
+All distributional results are based on fixed $T$ large $N$ asymptotic approximations, synonymous with Micro panel econometric theory in which the cross-sectional dimension is large relative to the time dimension. We consider three estimators: Pooled OLS, Fixed Effects and First-Differences.  
 
 \subsubsection*{Pooled OLS}
 The pooled OLS (POLS) estimator performs OLS on the entire panel, treating each $(i,t)$ observation as i.i.d. In POLS, identification of $\pmb{\beta}$ requires  $\mathbb{E}[\pmb{x}_{it}'v_{it}]=\mathbb{E}[\pmb{x}_{it}'\alpha_{i}]+\mathbb{E}[\pmb{x}_{it}'u_{it}]=0$.
