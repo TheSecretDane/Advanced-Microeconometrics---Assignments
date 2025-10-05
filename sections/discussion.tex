@@ -1,9 +1,17 @@
 \section{Discussion and conclusion}
 
-Inconsitent estimators.... 
+The most glaring problem of the methods proposed in this paper, is the potential violation of \textbf{FE(D).1}, essentially rendering the empirical part unreliable at best. A proper paper would dive deeper into this issue, using more advanced models that can account for this such as IV or GMM. 
 
-Cobb-Douglas assumed to be the functional form of production, assumes elasticity of substitution of 1. One could conduct a similar test, though it might be much more involved, say for a non-CRS CES production function. Human capital? Land? 
+Another potential issue is the assumption of Cobb-Douglas production technology. It could very well be an appropriate approximation but the there is no general consensus in the literature (ref) of this. A broader class of production functions such as the non-CRS CES class could account for at least an elasticity of substitution between inputs different from one. Similarly, there are other measurable production inputs that could be accounted for - e.g. human capital, though with some uncertainty. 
 
-Cluster / Driscroll Kraay / any more appropriate Avar estimator that takes into account the panel structure. GLS for modelling structurally induced autocorrelation.  
+Lastly, while we look at firm-specific fixed effects that are constant over time, it could be very reasonable to assume that there are common macro shocks among other factors that affect French manufacturing firms TFP equally, across time. A model extension including time-dummies (or perhaps Two-Way FE) and/or interaction terms could provide better estimates, and thus conclusions - though it wouldn't alleviate the strict exogeneity problem. 
+
+\textbf{Conclusion:} Lidt svært at komme med en konklusion der ikke er negativ.. 
+
+\textit{notes:}
 
 Omitted variables ? - Time dummies -\> plausible to assume that there are common TFP components for French manufacturing firms that are constant over time.
+
+\textit{Probably not needed, Driscroll Kraay is not appropriate for this sample i believe, but perhaps. Furhtermore, given the results we find, discussion about standard errors are meaningless. }
+
+Cluster / Driscroll Kraay / any more appropriate Avar estimator that takes into account the panel structure. GLS for modelling structurally induced autocorrelation.  

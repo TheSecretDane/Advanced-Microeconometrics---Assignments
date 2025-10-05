@@ -13,8 +13,9 @@ We write the model on compact form by stacking the regressors in the vector $\bm
 \begin{align} \label{equationline}
     y_{it} = c_i + \bm{x}_{it} \bm{\beta} + u_{it}, \quad t=1,2,\ldots,8, \quad i=1,2,\ldots,441
 \end{align}
+We will consider three estimators: Pooled OLS, Fixed Effects and First-Differences.  
 
-All distributional results are based on fixed $T$ large $N$ asymptotic approximations, synonymous with Micro panel econometric theory in which the cross-sectional dimension is large relative to the time dimension. We consider three estimators: Pooled OLS, Fixed Effects and First-Differences.  
+\textbf{Note on asymptotics:} All distributional results are based on fixed $T$ large $N$ asymptotic approximations, synonymous with Micro panel econometric theory in which the cross-sectional dimension is large relative to the time dimension. 
 
 \subsubsection*{Pooled OLS}
 The pooled OLS (POLS) estimator performs OLS on the entire panel, treating each $(i,t)$ observation as i.i.d. In POLS, identification of $\pmb{\beta}$ requires  $\mathbb{E}[\pmb{x}_{it}'v_{it}]=\mathbb{E}[\pmb{x}_{it}'\alpha_{i}]+\mathbb{E}[\pmb{x}_{it}'u_{it}]=0$.
@@ -32,28 +33,28 @@ $$ \Rightarrow  \pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}]
 , i.e. we see that $\pmb{\beta}$ is identified as $\pmb{\beta} = (\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])^{-1} \mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{y}_{i}]$ if we assume the following:
 \begin{enumerate}
     \item[\textbf{FE.1, FD.1}] \underline{Strict exogenity} $\mathbb{E}[u_{it}\vert \pmb{x}_{i1},\pmb{x}_{i2}\dots,\pmb{x}_{iT},c_i]=0\Rightarrow \mathbb{E}[\pmb{\ddot{X}}_{i}' \pmb{\ddot{u}}_{i}]=0$ \\
-    The time-varying error term must be exogenous to both log of capital and employment, reflecting no dependence of production shocks on log of capital or employment, neither contemporaneous, leaded or lagged. For FE, this implies $\mathbb{E}[ \ddot{u}_{it} \vert\pmb{\ddot{x}}_{it}]=0$, while it implies $\mathbb{E}[\Delta \pmb{\ddot{x}}_{it} \Delta u_{it}]=0$
+    The idiosyncratic error term must be exogenous to both log of capital and employment, reflecting no dependence of production shocks on log of capital or employment, neither contemporaneous, leaded or lagged. For FE, this implies $\mathbb{E}[ \ddot{u}_{it} \vert\pmb{\ddot{x}}_{it}]=0$, while it implies $\mathbb{E}[\Delta \pmb{\ddot{x}}_{it} \Delta u_{it}]=0$ for FD. 
     \item[\textbf{FE.2, FD.2}] \underline{ (full) rank condition}: $\text{rank}(\mathbb{E}[\pmb{\ddot{X}}_{i}'\pmb{\ddot{X}}_{i}])=K$ for FE and $\text{rank}(\mathbb{E}[\Delta\pmb{X}_{i}' \Delta\pmb{X}_{i}])=K$ \\
     Log of capital and employment can't be linearly dependent.
 \end{enumerate}
 
-With FE, estimation of $\pmb{\beta}$ under FE.1 and FE.2 using the analogy principle gives the following.
+With FE, estimation of $\pmb{\beta}$ under FE.1 and FE.2 using the analogy principle gives the following,
 \begin{equation} \label{EstimationEq}
     \pmb{\hat{\beta}}_{FE}= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1}\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{y}}_{i} }
 \end{equation}
-, where we emphasize that the former expectation for the population is over the firms $i$ (and not $t$).
+where we emphasize that the former expectation for the population is over the firms $i$ (and not $t$), and similarly for FD with $\Delta \pmb{X}_i$. 
 
 %% With $\pmb{\ddot{X}}'\pmb{\ddot{X}}$, we obtain a $(K \times K)$ matrix, which, with a $(K \times 1)$ vector from $\pmb{\ddot{X'}}_{i} \pmb{\ddot{y}}_{i}$ results in a $(K \times 1)$ vector $\pmb{\beta}$.
 
 \subsubsection*{Consistency of Fixed Effects estimator}
-We evaluate the consistency of the FE-estimator $\pmb{\hat{\beta}}_{FE}$ by inserting $\pmb{\ddot{y}}_i$ in \eqref{EstimationEq}, and generalize for the FD-estimator.
+We evaluate the consistency of the FE-estimator $\pmb{\hat{\beta}}_{FE}$ by inserting $\pmb{\ddot{y}}_i$ in \eqref{EstimationEq},
 \begin{align}
     \Rightarrow \pmb{\hat{\beta}}_{FE} &= \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i}}\pmb{\ddot{X}}_{i} \pmb{\beta}+\pmb{\ddot{X'}}_{i}\pmb{\ddot{u}}_i \right) \nonumber = \pmb{\beta} +\left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right) ^{-1} \left( \frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X}}_i' \pmb{\ddot{u}}_i} \right) \label{FE-estimator}
 \end{align}
-Under FE.1 and FE.2, we can apply a Law of Large Numbers (LLN) and Slutsky's theorem (using that the inverse of a matrix is continuous mapping) which shows us that $\pmb{\hat{\beta}}_{FE}$ is consistent for $\beta$,
-
+Under FE.1 and FE.2, we can apply a Law of Large Numbers (LLN) and Slutsky's theorem (using that the inverse of a matrix is continuous mapping) which shows us that $\pmb{\hat{\beta}}_{FE}$ is consistent for $\pmb{\beta}$,
 %%we can then we apply a Law of Large Numbers (LLN) such that $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}]$ and $p\text{-lim}\left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i} } \right)=\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{u}}_{i}]=0$. Then we use Slutskys theorem: $p\text{-lim}\left( \left(\frac{1}{N} \sum_{i=1}^N {\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i} } \right)^{-1}\right)=(\mathbb{E}[\pmb{\ddot{X'}}_{i} \pmb{\ddot{X}}_{i}])^{-1}$, which is allowed since the inverse matrix is defined, due to the rank assumption, and the inverse operator is a continuous function.
 $$p\text{-lim}(\pmb{\hat{\beta}}_{FE})=\pmb{\beta} + \left( \mathbb{E}[\ddot{\pmb{X'}}_i \ddot{\pmb{X}}_i] \right)^{-1}\mathbb{E}[\ddot{\pmb{X'}}_i \ddot{\pmb{u}}_i]=\pmb{\beta} + \left( \mathbb{E}[\ddot{\pmb{X'}}_i \ddot{\pmb{X}}_i] \right)^{-1}*\pmb{0} =\pmb{\beta}$$
+This is easily shown, very similarly, for the FD-estimator.
 
 \subsubsection*{Asymptotic normality of Fixed Effects estimator}
 Rearranging \eqref{EstimationEq} and using $\mathbb{E}[\sqrt{N}(\pmb{\hat{\beta}}_{FE}-\pmb{\beta})]=\pmb{0}$ under FE.1 and FE.2, we see that the sum of products of regressors and time-varying errors converge according to the Central Limit Theorem (CLT). The product rule then implies that the product of the two matrices converges (only) in distribution. Again, we generalize for the FD-estimator. 
@@ -125,6 +126,10 @@ We utilise an autoregressive process with one lag (AR(1)) to test for serial cor
     \hat{\ddot{u}}_{it}=\rho \hat{\ddot{u}}_{it-1}+\varepsilon_{it}
 \end{equation*}
 If $\hat{\ddot{u}}_{it-1}$ has a significant impact on $\hat{\ddot{u}}_{it}$ it warrants at minimal using cluster robust standard errors. While time-demeaned errors are by structure serially correlated, $\text{corr}(\hat{\ddot{u}}_{it}, \hat{\ddot{u}}_{it}) = -1/(T-1), \forall s \neq t$, under FE.3, it dies out under asymptotic properties when $T\rightarrow \infty$ for the FE model. \textit{The null should be -1/(T-1), using cluster robust errors in the aux. reg.}. This is \textit{not} for the case for the FD model, since $\text{Corr}(\Delta u_{it},\Delta u_{it-1})=-0.5$ if FE.3 holds (\cite[Chapter~10.6.3]{wooldridgeEconometricAnalysisCross2010}). 
+
+\textbf{Would merge the above with this.}
+
+Due to the time-demeaned errors being mechanically correlated of degree $\text{corr}(\hat{\ddot{u}}_{it}, \hat{\ddot{u}}_{it}) = -1/(T-1), \forall s \neq t$ under the null of $u_{it}$ being homoscedastic and serially uncorrelated, we test the following hypothesis in the FE model: $H_0: \rho = -1/(T-1)$ vs $ H_A: \rho \neq -1/(T-1)$. In the FD model, the null is that the differenced errors are white noise, and as such we merely test for significance of $\rho$. 
 
 %we in both cases have to use cluster robust errors that accounts for arbitrary serial correlation.  If there is arbitrary serial correlation, the t-statistic is not valid and since $\ddot{u}_{it},\ddot{u}_{it-1}$ is correlated (\textit{tends to 0 as T grows, so asymptotic properties are still exactly the same as always...)}. So using time-demeaned errors, we test for serial correlation in these errors by making the test robust to arbitrary serial correlation. The t-statistic will be valid, and if it still shows significance, it does indicate a problem. If this is the case we have to use robust standard errors in our model when estimating $\beta_K,\beta_K$, to be able to conduct valid tests.
 

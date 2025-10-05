@@ -2,7 +2,7 @@
 
 The data consists of $N = 441$ French manufacturing firms over 12 years $(T=12)$ from 1968 to 1979, and is thus a panel data set with $NT = 5292$ observations. The data is balanced.  
 
-We estimate the models using the methods outlined in Section \ref{sec:methodology}. Table \ref{tab:autocorr_tests} reports the results of the autocorrelation tests as described in Section \ref{sec:methodology}. Both models exhibit significant first-order autocorrelation additional to the structurally induced autocorrelation implied by the transformations, and as such we use robust standard errors  - to ensure consistent variance estimation. The estimates along with robust standard errors are reported in Table \ref{tab:estimates}. Coefficient significance and sign are consistent between methods that is we find a positive partial effect on log deflated sales from increasing any of the inputs conditional on the unobserved heterogeneity, as one would except. With labor increases resulting in a factor $\approx 4.5$ and $\approx 8.7$ relative sales increase, in percent, respectively. 
+We estimate the models using the methods outlined in Section \ref{sec:methodology}. Table \ref{tab:autocorr_tests} reports the results of the autocorrelation tests as described in Section \ref{sec:methodology}. Both models exhibit significant first-order autocorrelation additional to the mechanically induced autocorrelation implied by the transformations, and as such we use robust standard errors  - to ensure consistent variance estimation. The estimates along with robust standard errors are reported in Table \ref{tab:estimates}. Coefficient significance and sign are consistent between methods that is we find a positive partial effect on log deflated sales from increasing any of the inputs conditional on the unobserved heterogeneity, as one would except. With labor increases resulting in a factor $\approx 4.5$ and $\approx 8.7$ relative sales increase, in percent, respectively. 
 
 \input{tables/emp_estimates.tex}
 
@@ -22,13 +22,13 @@ We test strict exogeneity by adding leads of the regressors. In the FE specifica
 \end{bmatrix} \\
 H_0: \delta_L = \delta_K = 0 \quad \text{vs} \quad H_A: \text{any } \delta_i \neq 0, i=L, K
 \end{align*}
-This suggests that the strict exogeneity assumption on the \textit{population} might not hold, such that both $\hat{\beta}_{\text{FE}}$ and $\hat{\beta}_{\text{FD}}$ are inconsistent, even if one finite sample model suggests otherwise which simply could be due to the violation having a certain structure which might get washed out in the transformation(s). The full set of results is reported in Table~\ref{tab:strict_exog_test}. 
+This suggests that the strict exogeneity assumption on the \textit{population} might not hold, such that neither $\hat{\beta}_{\text{FE}}$ and $\hat{\beta}_{\text{FD}}$ are consistent, even if one finite sample model suggests otherwise which simply could be due to the violation having a certain structure which might get washed out in the transformation(s). The full set of results is reported in Table~\ref{tab:strict_exog_test}. 
 
 \input{tables/miss.tex}
 
-\hline 
+While the above suggest that both estimators are inconsistent as well as not asymptotically normal, we continue with the main hypothesis test of the assignment as if they were. A proper paper would have to employ different models that can account for the endogeneity problem. 
 
-Lastly we proceed to test the null hypothesis of constant returns to scale. From Table \ref{tab:wald}, we reject the null at the 1 \% significance level with a p-value of $\approx 0$. Thus, we conclude that the (Cobb-Douglas) production function does not exhibit constant returns to scale, for French manufacturing firms in the period 1968-1979. 
+We proceed to test the null hypothesis of constant returns to scale. From Table \ref{tab:wald}, we reject the null at the 1 \% significance level with a p-value of $\approx 0$. Thus, we conclude that the (Cobb-Douglas) production function does not exhibit constant returns to scale, for French manufacturing firms in the period 1968-1979. 
 
 \input{tables/wald_crs.tex}
 
