@@ -110,7 +110,7 @@ We utilise the Wald-test to test for CRS, where the null-hypothesis is $H_0: \ma
     [\mathbf{R}\widehat{\text{Avar}({\boldsymbol{\hat{\beta}}}_{FE})}\mathbf{R}']^{-1}
     (\mathbf{R} \boldsymbol{\hat{\beta}}-\mathbf{r})
 \end{equation*}
-The null- and alternative-hypothesis for testing CRS is:
+If \textbf{FE.1-3} is assumed the Wald-statistic is the same but we assume homoscedasticity in the errors when inserting $\widehat{\text{Avar}(\bm{\hat\beta}_{FE}})$. The null- and alternative-hypothesis for testing CRS is:
 \begin{align*}
   H_0 & : \mathbf{R}\boldsymbol{\beta}=\mathbf{r} \Leftrightarrow
 \begin{bmatrix} 1&1 \end{bmatrix} \begin{bmatrix} \beta_K \\ \beta_L \end{bmatrix} =1
@@ -118,18 +118,19 @@ The null- and alternative-hypothesis for testing CRS is:
 H_A & : \beta_K+\beta_L \neq 1
 \end{align*}
 
-If the assumptions for the Wald-test holds we also see the squared $t$-statistic, $t^2$, is equivalent to the Wald-statistic: $t^2=(\frac{\textbf{R}\bm{\hat\beta}-1}{se(\bm{\hat\beta})})^2$ where  $\text{se}(\bm{\hat\beta})=\sqrt{\text{Avar}(\hat\beta_K)+\text{Avar}(\hat\beta_L)+2\text{ACov}({\hat\beta_K,\hat\beta_L}})$. For a joint test this pattern follows a $F$-distribution (asymptotic chi squared tho, right?), not a squared $t$-distribution. This is important because in the strict exogeneity test for the FE and FD models it also tests for joint significance in their leaded terms, where we test for two linear restrictions.
+If the assumptions for the Wald-test holds we also see the squared $t$-statistic, $t^2$, is equivalent to the Wald-statistic: $t^2=(\frac{\textbf{R}\bm{\hat\beta}-1}{se(\bm{\hat\beta})})^2$ where $\text{se}(\bm{\hat\beta})=\sqrt{\text{Avar}(\hat\beta_K)+\text{Avar}(\hat\beta_L)+2\text{ACov}({\hat\beta_K,\hat\beta_L}})$. For a joint test this pattern follows a $\chi^2_Q$ distribution, not a squared $t$-distribution, because . This is important because in the strict exogeneity test for the FE and FD models it also tests for joint significance in their leaded terms, where we test for two linear restrictions.
 
 \subsubsection*{Serial correlation test}
-We utilise an autoregressive process with one lag (AR(1)) to test for serial correlation in the error termby using an auxilliary regression:
+We utilise an autoregressive process with one lag (AR(1)) to test for serial correlation in the error term by using an auxilliary regression:
 \begin{equation*}
     \hat{\ddot{u}}_{it}=\rho \hat{\ddot{u}}_{it-1}+\varepsilon_{it}
 \end{equation*}
-If $\hat{\ddot{u}}_{it-1}$ has a significant impact on $\hat{\ddot{u}}_{it}$ it warrants at minimal using cluster robust standard errors. While time-demeaned errors are by structure serially correlated, $\text{corr}(\hat{\ddot{u}}_{it}, \hat{\ddot{u}}_{it}) = -1/(T-1), \forall s \neq t$, under FE.3, it dies out under asymptotic properties when $T\rightarrow \infty$ for the FE model. \textit{The null should be -1/(T-1), using cluster robust errors in the aux. reg.}. This is \textit{not} for the case for the FD model, since $\text{Corr}(\Delta u_{it},\Delta u_{it-1})=-0.5$ if FE.3 holds (\cite[Chapter~10.6.3]{wooldridgeEconometricAnalysisCross2010}). 
+If $\hat{\ddot{u}}_{it-1}$ has a significant impact on $\hat{\ddot{u}}_{it}$ it warrants at minimal using cluster robust standard errors in our model. While time-demeaned errors are by structure serially correlated, $\text{corr}(\hat{\ddot{u}}_{it}, \hat{\ddot{u}}_{it}) = -1/(T-1), \forall s \neq t$ it dies out under asymptotic propteries when $T\rightarrow \infty$. Under \textbf{FE.3} we only have to use period $\{T,T-1\}$ because we assume constant $\sigma^2 _u$ across all time periods but $\sigma^2_{\ddot{u}}$ is structurally correlated so its calculated as $\sigma^2_{\ddot{u}}=\sigma^2_u(1-1/T)$. Therefore any two select periods we take will yield the same result if $u_{it}$ is homoscedastic. If we only assume \textbf{FE.1-2} + cluster robust errors, we have to use all periods and use the estimate for the null-hypothesis $H_0:\rho=-1/(T-1)$, because the errors $\sigma^2_{u}$ are not the same on the diagonal covariance matrix.
+This is \textit{not} for the case for the FD model, since $\text{Corr}(\Delta u_{it},\Delta u_{it-1})=-0.5$ if FE.3 holds (\cite[Chapter~10.6.3]{wooldridgeEconometricAnalysisCross2010}). 
 
 \textbf{Would merge the above with this.}
 
-Due to the time-demeaned errors being mechanically correlated of degree $\text{corr}(\hat{\ddot{u}}_{it}, \hat{\ddot{u}}_{it}) = -1/(T-1), \forall s \neq t$ under the null of $u_{it}$ being homoscedastic and serially uncorrelated, we test the following hypothesis in the FE model: $H_0: \rho = -1/(T-1)$ vs $ H_A: \rho \neq -1/(T-1)$. In the FD model, the null is that the differenced errors are white noise, and as such we merely test for significance of $\rho$. 
+Due to the time-demeaned errors being mechanically correlated of degree $\text{corr}(\hat{\ddot{u}}_{it}, \hat{\ddot{u}}_{is}) = -1/(T-1), \forall s \neq t$ under the null of $u_{it}$ being homoscedastic and serially uncorrelated, we test the following hypothesis in the FE model: $H_0: \rho = -1/(T-1)$ vs $ H_A: \rho \neq -1/(T-1)$. In the FD model, the null is that the differenced errors are white noise, and as such we merely test for significance of $\rho$. 
 
 %we in both cases have to use cluster robust errors that accounts for arbitrary serial correlation.  If there is arbitrary serial correlation, the t-statistic is not valid and since $\ddot{u}_{it},\ddot{u}_{it-1}$ is correlated (\textit{tends to 0 as T grows, so asymptotic properties are still exactly the same as always...)}. So using time-demeaned errors, we test for serial correlation in these errors by making the test robust to arbitrary serial correlation. The t-statistic will be valid, and if it still shows significance, it does indicate a problem. If this is the case we have to use robust standard errors in our model when estimating $\beta_K,\beta_K$, to be able to conduct valid tests.
 
