@@ -1,8 +1,8 @@
 \subsubsection*{Efficiency}
 
 \begin{itemize}
-    \item [\textbf{FE.3}:] For $\hat{\beta}$ to be efficient - have the smallest possible asymptotic variance - it must hold that $\mathbb{E}(\bm{u}_i \bm{u}_i' | \bm{x}_i, c_i) = \mathbb{E}(\bm{u}_i \bm{u}_i') = \Omega_{u} = \sigma^2_u \bm{I}_T$, i.e. the error term $u_{it}$ is homoscedastic and serially or in other words; white noise in levels. 
-    \item [\textbf{FD.3}:] Similarly for $\hat{\beta}_{FD}$ to be efficient we need $\mathbb{E}(\bm{e}_i \bm{e}_{i}'|\bm{x}_i, c_i) = \sigma^{2}_{e} \bm{I}_{T-1}$ which implies that $u_{it}$ is white noise in differences. 
+    \item [\textbf{FE.3}:] For $\hat{\bm{\beta}}_{FE}$ to be efficient - have the smallest possible asymptotic variance - it must hold that $\mathbb{E}(\bm{u}_i \bm{u}_i' | \bm{x}_i, c_i) = \mathbb{E}(\bm{u}_i \bm{u}_i') = \Omega_{u} = \sigma^2_u \bm{I}_T$, i.e. the error term $u_{it}$ is homoscedastic and serially uncorrelated or in other words; white noise in levels. 
+    \item [\textbf{FD.3}:] Similarly for $\hat{\bm{\beta}}_{FD}$ to be efficient we need $\mathbb{E}(\bm{e}_i \bm{e}_{i}'|\bm{x}_i, c_i) = \sigma^{2}_{e} \bm{I}_{T-1}$ which implies that $u_{it}$ is white noise in differences. 
 \end{itemize}
 % This results in the following from \eqref{ eq:asympnormal} using the LIT, 
 % \begin{align*}
@@ -18,9 +18,9 @@
 %     &\text{and} \quad \hat{\bm{u}}_i = \bm{\ddot{y}}_i - \bm{\ddot{X}}_i \hat{\beta}_{FE}
 % \end{align*}
 % Note that we need to correct the degrees of freedom for the implicit estimation of the fixed effects, which is why we subtract $N$ from the denominator. 
-Both assumptions cannot hold simultaneously (perhaps ref Wooldridge or even better Serial Corr section instead of the following:), due to $e_{it}$ having corr = -1/2 under FE.3 i.e. $u_{it}$ is white noise in levels in which case FE is efficient. Contrarily, if FE.3 does not hold, FD.3 might, and it might not. In any case, rejecting the hypothesis outlined in section (ref serial corr sec) warrant the use of a cluster robust variance estimator, provided the usual regularity conditions hold.
+Both assumptions cannot hold simultaneously, due to $e_{it}$ having $\text{corr}(e_{it}, e_{it-1})= -1/2$ under FE.3 in which case FE is efficient. Contrarily, if FE.3 does not hold, FD.3 might, and it might not. In any case, rejecting the hypothesis outlined in the serial correlation section, warrant the use of a cluster robust variance estimator, provided the usual regularity conditions hold. 
 
-If any of these assumptions do not hold, as we will see, we can still obtain consistent estimates of the standard errors using robust or clustered standard errors, though often at the cost of efficiency. In which case we estimate the middle part of the sandwich from \eqref{eq:asympnormal} using the analogy principle i.e. using the estimated residuals, such that, 
+If any of these assumptions do not hold, we can still obtain consistent estimates of the standard errors using clustered standard errors, though often at the cost of efficiency. In which case we estimate the middle part of the sandwich from \eqref{eq:asympnormal} using the analogy principle i.e. using the estimated residuals, such that, 
 \begin{align*}
     \hat{\text{Avar}}(\hat{\beta}_{FE}) = \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1} \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \hat{\ddot{\bm{u}}}_i \hat{\ddot{\bm{u}}}_i^\prime \bm{\ddot{X}}_i \right) \left( \sum_{i=1}^N \bm{\ddot{X}}_i^\prime \bm{\ddot{X}}_i \right)^{-1}
 \end{align*} 
